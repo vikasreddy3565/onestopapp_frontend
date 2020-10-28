@@ -3,7 +3,12 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  refreshTokenExpirationTime: 120, // 30min
+  baseFolder: '/',
+  webApiDomain: 'localhost:5000',
+  webApiEndPoint: 'http://localhost:5000/api/',
+  httpRequestInterceptorExpirationTime: 45000 // ms
 };
 
 /*

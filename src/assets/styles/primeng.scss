@@ -1,0 +1,275 @@
+body {
+    .ui-menubar {
+        padding: 0.25em;
+        background: linear-gradient(to bottom, #f6f7f9 0%, #ebedf0 100%);
+        color: #1b1d1f;
+        border: 1px solid #D5D5D5;
+    }
+    .ui-menubar .ui-menubar-root-list > .ui-menuitem > .ui-menuitem-link {
+        padding: 0.5em !important;
+    }
+    .ui-datepicker table td {
+        padding: 0.2em !important;
+    }
+    .ui-panel .ui-panel-content {
+        padding: 0.5em .75em !important;
+    }
+    .ui-panel .ui-panel-titlebar .ui-panel-title {
+        font-weight: 600 !important;
+    }
+    .ui-dropdown .ui-dropdown-label {
+        padding-right: 2.5em !important;
+    }
+    .ui-state-disabled, body .ui-widget:disabled {
+        filter: alpha(opacity=80);
+    }
+    .ui-chkbox {
+        margin-left: 1.0em !important;
+    }
+    .ui-chkbox:first-of-type {
+        margin-left: .1em !important;
+    }
+    .ui-inputtext {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: normal;
+    }
+    .ui-calendar.ui-calendar-w-btn .ui-inputtext {
+        height: 100%;
+    }
+}
+:root body {
+    .ui-radiobutton .ui-radiobutton-box {
+        background-color: #dedede;
+    }
+}
+:root .ui-button.ui-button-text-icon-left .ui-button-text {
+    padding: 0.25em 1em 0.25em 1.8em;
+}
+.ui-state-default {
+    border: 1px solid #d6d6d6;
+    background: #ffffff;
+    color: #555555;
+}
+.ui-state-active a {
+    color: #024fca;
+}
+::ng-deep .ui-widget-content a {
+    color: #024fca;
+}
+.ui-widget {
+}
+.ui-widget-header {
+    font-weight: 800;
+}
+.ui-widget-header .ui-inputtext, .ui-widget-content .ui-inputtext {
+    max-width: 100%;
+}
+
+/* Radio button and gap control */
+.ui-radiobutton-label {
+    margin-right: 1.0em;
+    cursor: pointer;
+}
+:root .ui-radiobutton {
+    margin-right: 0.1em;
+}
+
+.ui-radiobutton .ui-radiobutton-box.ui-state-active .ui-radiobutton-icon {
+    background-color: #5f5f5f !important;
+}
+.ui-radiobutton .ui-radiobutton-box.ui-state-active {
+    border-color: #a6a6a6 !important;
+    background-color: #dedede !important;
+    color: #ffffff;
+}
+.ui-calendar {
+    display: flex !important;
+}
+.ui-fluid .ui-calendar {
+    width: 100%;
+    max-width: 12.2em;
+}
+:root .ui-fluid .ui-button {
+    width: auto;
+}
+.ui-button {
+    margin-bottom: .2em !important;
+    margin-right: .1em !important;
+}
+::ng-deep .ui-button-text {
+    padding-left: 2em;
+}
+
+.ui-datepicker {
+    width: 24em !important;
+    min-width: 20em !important;
+}
+
+.ui-dialog {
+    max-width: 680px;
+}
+:root .ui-grid .ui-grid-row {
+    display: block;
+}
+/* Grid width control */
+.ui-grid-col-fix-1em {
+    width: 0.5em;
+    display: block;
+    float: left;
+}
+.ui-grid-col-label {
+    display: block;
+    margin-left: 0.8em;
+}
+
+.ui-fluid .ui-button-text-icon-left .ui-button-text, .ui-fluid .ui-button-text-icon-right .ui-button-text {
+    padding-left: 2em;
+}
+.ui-multiselect .ui-multiselect-panel {
+    left: 0px !important;
+    max-width: 70vw !important;
+}
+label.ui-radiobutton-label.ng-star-inserted {
+    margin-right: 1em;
+}
+
+::ng-deep .ui-radiobutton .ui-radiobutton-box.ui-state-active .ui-radiobutton-icon {
+    background-color: gray;
+    width: 8px;
+    height: 8px;
+    margin-left: -4px;
+    margin-top: -4px;
+}
+.ui-message-error {
+    background-color: #f8b7bd;
+    border: 0 none;
+    color: #212121;
+}
+.ui-message.ui-message-error {
+    background-color: #f8b7bd;
+    border: 0 none;
+    color: #212121;
+}
+.ui-message.ui-message-error .ui-message-icon {
+    color: #212121;
+}
+.ui-inputtextarea-resizable {
+    width: 100%;
+    min-height: 69px;
+}
+@keyframes cssAnimation{
+    from {visibility: hidden;}
+    to {visibility: visible;}
+}
+
+@-webkit-keyframes cssAnimation{
+    from {visibility: hidden;}
+    to {visibility: visible;}
+}
+.ui-datatable .ui-datatable-thead>tr>th, .ui-datatable .ui-datatable-tfoot>tr>td, .ui-datatable .ui-datatable-data>tr>td {
+    padding: 0em .5em 0em;
+}
+.ui-datatable .ui-datatable-thead > tr > th, .ui-datatable .ui-datatable-tfoot > tr > td, .ui-datatable .ui-datatable-data > tr > td {
+    white-space: pre-wrap;
+    word-wrap: break-word;
+}
+.ui-fileupload-choose input[type=file] {
+    font-size: 1em !important;
+}
+.ui-dropdown.ui-state-disabled .ui-dropdown-trigger, .ui-dropdown.ui-state-disabled .ui-dropdown-label {
+    background: rgb(235,235,228)
+}
+/* Conditionally Target IE10 and 11 */
+@media all and (-ms-high-contrast: none), (-ms-high-contrast: active) {
+    p-confirmDialog.lf-confirm-dialog .ui-dialog.ui-confirmdialog {
+        transform: translateX(0%) translateY(0%) !important;
+    }
+}
+p-confirmDialog.lf-confirm-dialog .ui-dialog.ui-confirmdialog {
+    min-width: 350px;
+    width: 450px;
+    height: auto;
+}
+p-checkbox {
+    ::ng-deep .ui-chkbox-box {
+      border-color: #999;
+    }
+}
+p-table th input {
+    width: 100%;
+}
+p-dialog .ui-dialog-content {
+    max-height: calc(100vh - 12em);
+    overflow-y: auto;
+}
+p-dialog .ui-dialog {
+    top:50px !important;
+}
+
+@media screen and (max-width: 470px) {
+    .ui-datatable-reflow .ui-datatable-data td .ui-column-title {
+        min-width: 10em;
+        width: 10em;
+    }
+    .ui-datepicker {
+        width: 21em !important;
+    }
+    body {
+        .ui-datepicker table {
+            font-size: 12px !important;
+        }
+    }
+
+}
+@media screen and (max-width: 40em) {
+    .label-font-bold-mobile {
+        .ui-g > div:first-child {
+            font-weight: bold;
+        }
+        .ui-grid-row > div:first-child {
+            font-weight: bold;
+        }
+    }
+    .ui-fileupload-buttonbar .ui-button {
+        display: inline-block !important;
+        max-width: 6.8em !important;
+        min-width: 6.0em !important;
+        margin-right: 0.1em !important;
+        margin-bottom: 0 !important;
+    }
+    .ui-table-wrapper {
+        border: 1px solid #c8c8c8;
+    }
+    ::ng-deep .ui-table-responsive .ui-table-tbody>tr>td {
+        display: grid;
+    }
+    .ui-table-responsive .ui-table-tbody>tr>td .ui-column-title {
+        width: 10em;
+    }
+    .ui-fluid .ui-dropdown {
+        width: 100% !important;
+    }
+}
+@media (max-width: 35em) {
+    .ui-datatable-reflow .ui-datatable-data tr.ui-widget-content {
+        border-bottom: 1px solid gray;
+        border-top: 1px solid gray;
+    }
+    .ui-datatable-reflow .ui-datatable-data td .ui-column-title {
+        min-width: 10em !important;
+    }
+    .ui-datatable-reflow .ui-datatable-data>tr>td {
+        display: flex;
+    }
+}
+
+/* Fix to meet Section 508 Compliance */
+body {
+    .ui-slider:not(.ui-state-disabled) .ui-slider-handle:hover {
+        background-color: #666666 !important;
+    }
+    .ui-tabview.ui-tabview-left .ui-tabview-nav {
+        margin-right: 2px !important;
+    }
+}
