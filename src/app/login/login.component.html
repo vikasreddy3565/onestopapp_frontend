@@ -1,31 +1,84 @@
-<div class="ui-g-9 login-state-div">
-    <p-panel header="Technology News" [toggleable]="false" class="agreement">
-        <p-carousel [value]="" [autoplayInterval]="3000" [circular]="true">
-            <p-header>
-                <h5>Vertical</h5>
-            </p-header>
-            <ng-template let-car pTemplate="item">
-                Content to display
+<div class="ui-g-3 login-state-div">
+    <br>
+    <p-panel header="Movies" [toggleable]="false" class="agreement">
+        <p-carousel [value]="moviesNowPlaying" [numVisible]="2"  [numScroll]="1" [circular]="true" [autoplayInterval]="3000">
+            <ng-template pTemplate="header">
+                <h5>Basic</h5>
+            </ng-template>
+            <ng-template let-product pTemplate="item">
+                <div class="product-item">
+                    <div class="product-item-content">
+                        <div class="p-mb-3">
+                            <img src="https://image.tmdb.org/t/p/w500/{{product.poster_path}}" [alt]="product.original_title" class="product-image" />
+                        </div>
+                        <div>
+                            <h5 class="p-mb-1">Release Date: {{product.release_date}}</h5>
+                            <h4 class="p-mb-1">Rating: {{product.vote_average}}</h4>
+                        </div>
+                    </div>
+                </div>
             </ng-template>
         </p-carousel>
     </p-panel>
-    <p-panel header="Movie News" [toggleable]="false" class="agreement">
-        <p-carousel [value]="" [autoplayInterval]="3000" [circular]="true">
-            <p-header>
-                <h5>Vertical</h5>
-            </p-header>
-            <ng-template let-car pTemplate="item">
-                Content to display
+    <!-- <p-panel header="Technology" [toggleable]="false" class="agreement">
+       <p-carousel [value]="nowPlaying" [numVisible]="2"  [numVisible]="2" [numScroll]="1" [circular]="true" [autoplayInterval]="3000">
+            <ng-template pTemplate="header">
+                <h5>Basic</h5>
+            </ng-template>
+            <ng-template let-product pTemplate="item">
+                <div class="product-item">
+                    <div class="product-item-content">
+                        <div class="p-mb-3">
+                            <img src="https://image.tmdb.org/t/p/w200/{{product.poster_path}}" [alt]="product.original_title" class="product-image" />
+                        </div>
+                        <div>
+                            <h6 class="p-mb-1">Release Date: {{product.release_date}}</h6>
+                            <h4 class="p-mb-1">Rating: {{product.vote_average}}</h4>
+                        </div>
+                    </div>
+                </div>
             </ng-template>
         </p-carousel>
-    </p-panel>
-    <p-panel header="World News" [toggleable]="false" class="agreement">
-        <p-carousel [value]="" [autoplayInterval]="3000" [circular]="true">
-            <p-header>
-                <h5>Vertical</h5>
-            </p-header>
-            <ng-template let-car pTemplate="item">
-                Content to display
+    </p-panel> -->
+    <!-- <p-panel header="Movies" [toggleable]="false" class="agreement">
+        <p-carousel [value]="nowPlaying" [numVisible]="2"  [numVisible]="2" [numScroll]="1" [circular]="true" [autoplayInterval]="3000">
+            <ng-template pTemplate="header">
+                <h5>Basic</h5>
+            </ng-template>
+            <ng-template let-product pTemplate="item">
+                <div class="product-item">
+                    <div class="product-item-content">
+                        <div class="p-mb-3">
+                            <img src="https://image.tmdb.org/t/p/w200/{{product.poster_path}}" [alt]="product.original_title" class="product-image" />
+                        </div>
+                        <div>
+                            <h6 class="p-mb-1">Release Date: {{product.release_date}}</h6>
+                            <h4 class="p-mb-1">Rating: {{product.vote_average}}</h4>
+                        </div>
+                    </div>
+                </div>
+            </ng-template>
+        </p-carousel>
+    </p-panel> -->
+</div>
+<div class="ui-g-3 login-state-div" *ngIf="news">
+    <br>
+    <p-panel header="News" [toggleable]="false" class="agreement">
+        <p-carousel [value]="news.articles" [numVisible]="1"  [numScroll]="1" [circular]="true" [autoplayInterval]="3000">
+            <ng-template pTemplate="header">
+                <h5>Basic</h5>
+            </ng-template>
+            <ng-template let-product pTemplate="item">
+                <div class="product-item">
+                    <div class="product-item-content">
+                        <div class="p-mb-3">
+                            <img src="{{product.urlToImage}}" [alt]="product.description" class="product-image" />
+                        </div>
+                        <div>
+                            <h5 class="p-mb-1">Description: {{product.description}}</h5>
+                        </div>
+                    </div>
+                </div>
             </ng-template>
         </p-carousel>
     </p-panel>
@@ -47,7 +100,7 @@
                 </div>
                 <div class="ui-grid-row login-pw-div">
                     <span class="ui-float-label">
-                        <input id="password" type="password" maxlength="256" trim pInputText
+                        <input id="password" pPassword type="password" maxlength="256" trim pInputText
                             formControlName="password" />
                         <label for="password">Password:</label>
                     </span>
@@ -78,90 +131,17 @@
             </div>
         </p-fieldset>
     </div>
-</div>
-<!-- <div>
-            <p-fieldset class="loginlegend" legend="Links">
-                <div class="link-icon-div">
-                    <mat-icon class="mat-icon-margin" aria-hidden="true">person_add</mat-icon>&nbsp;
-                    <a id="idUserRegistration" routerLink="/registerDesignee" routerLinkActive="active" title="User Registration">User Registration</a>
-                </div>
-                <div class="link-icon-div">
-                    <mat-icon class="mat-icon-margin" aria-hidden="true">lock_open</mat-icon>&nbsp;
-                    <a id="idForgotUsername"  routerLink="/forgotUsername" routerLinkActive="active" title="Forgot Username">Forgot Username</a>
-                </div>
-                <div class="link-icon-div">
-                    <mat-icon class="mat-icon-margin" aria-hidden="true">lock</mat-icon>&nbsp;
-                    <a id="id_ForgotPassword" routerLink="/forgotPassword" routerLinkActive="active" title="Forgot Password">Forgot Password</a>
-                </div>
-            </p-fieldset>
-        </div> -->
-
-<!-- <div class="ui-g">
-    <div class="ui-g-12 ui-md-12">
-            <h4 class="designeeLocatorLink">Looking for a Designee in your area? <a routerLink="/designeeLocator" class="linkText" routerLinkActive="active" title="Search Designee">Click Here</a></h4>
-
-
-        <div class="ui-g-9 login-state-div">
-            <p-panel header="Paper Reduction Act Statement" [toggleable]="true" class="agreement">
-                <p>
-                    Paperwork Reduction Act Statement The information is necessary to determine your eligibility to become an FAA designee.
-                    It is estimated that it will take approximately one minute per response. The information will become part of
-                    the Privacy Act system of records, DOT /FAA 830, Representative of the Administrator, and it will be used to
-                    evaluate your qualifications for appointment as a designee. It should be noted that a person is not required
-                    to collect information unless it displays a currently valid OMB control number. The OMB control number associated
-                    with this collection of information is 2120-0033. Comments concerning the accuracy of this burden and suggestions
-                    for reducing the burden should be directed to the FAA at: 800 Independence Ave SW, Washington, DC 20591, Attn:
-                    Information Collection Clearance Officer, ABA-20.
-                </p>
-            </p-panel><br />
-            <p-panel header="FAA Designee Program" [toggleable]="true" class="agreement">
-                <p>The Designee Management System (DMS) is a web-based tool designed to standardize the management of designees.
-                    The Designee Management Policy establishes the process and procedures for managing all aspects of administration
-                    including registration, application, selection, appointment, orientation, training, oversight, suspension
-                    and termination.</p>
-                <p>The DMS program represents a consolidation of existing policy and procedures across the Office of Aviation
-                    Safety (AVS) lines of business: Aircraft Certification Service (AIR), Flight Standards Service (AFS)
-                    and the Office of Aerospace Medicine (AAM). All Applicants for designation, current designees, and FAA
-                    personnel responsible for managing designees/delegations must follow the Designee Management Policy and
-                    use the DMS tool as directed except for the holders of Organization Designation Authorization (ODA).</p>
-                <p><a id="id_orders_notices" href="http://www.faa.gov/regulations_policies/orders_notices/" target="_blank">Please click the link to view the policy</a></p>
-                <p>Note: Due to security requirements, after 30 minutes of inactivity you will be automatically logged off DMS
-                    and required to login again before resuming activity.</p>
-            </p-panel>
-        </div>
-        <div class="ui-g-3 login-form-div">
-            <div>
-                <p-fieldset class="loginlegend" legend="Login">
-                    <form [formGroup]="loginFormGroup">
-                        <div class="ui-message ui-message-error ui-corner-all">
-                        </div>
-                        <div class="ui-grid-row login-username-div">
-                            <span class="ui-float-label">
-                                <input id="userName" type="text" maxlength="256" trim pInputText formControlName="userName"/>
-                                <label for="username">Username:</label>
-                            </span>
-                            <div class="ui-message ui-message-error ui-corner-all" *ngIf="!loginFormGroup.controls['userName'].valid && (loginFormGroup.controls['userName'].touched)">
-                                <span *ngIf="loginFormGroup.controls.userName.errors.required">User Name is required.</span>
-                            </div>
-                        </div>
-                        <div class="ui-grid-row login-pw-div">
-                            <span class="ui-float-label">
-                                <input id="password" type="password" maxlength="256" trim pInputText formControlName="password"/>
-                                <label for="password">Password:</label>
-                            </span>
-                            <div class="ui-message ui-message-error ui-corner-all" *ngIf="!loginFormGroup.controls['password'].valid && (loginFormGroup.controls['password'].touched)">
-                                <span *ngIf="loginFormGroup.controls.password.errors.required">Password is required.</span>
-                            </div>
-                        </div>
-                        <div>
-                            <button pButton id="btn_login_cmp_submit_1" type="submit" class="btn btn-single-width btn-login" icon="fa fa-sign-in" title="Login to Designee Management System" label="Login"></button>
-                        </div>
-                    </form>
-                </p-fieldset>
+    <div *ngIf="data">
+        <p-fieldset class="loginlegend" legend="Weather">
+            <div class="ui-grid-row weather-div">
+                    <label for="humidity">Humidity: </label>&nbsp;&nbsp;{{data.main.humidity}}
             </div>
-            <div style="padding-top: 28px;"></div>
-            <div>
+            <div class="ui-grid-row login-pw-div">
+                    <label for="sunset">Sunrise: </label>&nbsp;&nbsp;{{sunrise}}
             </div>
-        </div>
+            <div class="ui-grid-row login-pw-div">
+                    <label for="sunset">Sunset:</label>&nbsp;&nbsp;{{sunset}}
+            </div>
+        </p-fieldset>
     </div>
-</div> -->
+</div>

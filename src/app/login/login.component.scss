@@ -57,7 +57,7 @@ a:hover.linkText {
     color: red;
 }
 .login-state-div {
-    width: 75%;
+    width: 70%;
 }
 ::ng-deep .login-pw-div {
     margin-top: 20px;
@@ -84,11 +84,11 @@ a:hover.linkText {
         padding: .2em;
     }
     .login-form-div {
-        width: 30%;
+        width: 50%;
         padding: .2em;
     }
     .ui-dialog {
-        max-width: 90%;
+        max-width: 100%;
     }
 }
 @media screen and (max-width: 414px) {
@@ -106,4 +106,9 @@ a:hover.linkText {
     ::ng-deep .ui-fieldset, .ui-fieldset .ui-fieldset-legend {
         padding: .25em 0.1em !important;
     }
+}
+
+.product-image{
+    width: 350pt !important;
+    height: 300pt !important;
 }

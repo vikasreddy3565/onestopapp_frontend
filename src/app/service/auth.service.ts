@@ -5,6 +5,7 @@ import { environment } from './../../environments/environment';
 import { HttpTokenService } from './httptoken.service';
 import { Router } from '@angular/router';
 import { JwtParameters, AuthResult, User } from '../models/export.model';
+import { Observable } from 'rxjs';
 
 @Injectable()
 export class AuthenticationService {
@@ -127,7 +128,6 @@ export class AuthenticationService {
     return JSON.parse(user);
   }
 
-
   logout() {
     // remove user from local storage to log user out
     sessionStorage.removeItem('currentUser');
@@ -137,4 +137,7 @@ export class AuthenticationService {
     this.router.navigate(['//login']);
   }
 
+  getCountries(): Observable<any> {
+    return this.http.get('https://restcountries.eu/rest/v2/all');
+  }
 }

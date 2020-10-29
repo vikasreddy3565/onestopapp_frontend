@@ -15,6 +15,10 @@ import { environment } from 'src/environments/environment';
 import { AuthenticationService } from './service/auth.service';
 import { UtilityService } from './service/utility.service';
 import { LoaderService } from './service/loader.service';
+import { WeatherService } from './service/weather.service';
+import { HttpTokenService } from './service/httptoken.service';
+import { MovieService } from './service/movie.service';
+import { NewsService } from './service/news.service';
 
 @NgModule({
   declarations: [AppComponent],
@@ -33,8 +37,12 @@ import { LoaderService } from './service/loader.service';
   providers: [
     MessageService,
     AuthenticationService,
+    HttpTokenService,
     UtilityService,
     LoaderService,
+    WeatherService,
+    MovieService,
+    NewsService,
     { provide: OSA_WEBAPI_LISTENER_URL, useValue: environment.webApiEndPoint },
   ],
   bootstrap: [AppComponent],
