@@ -43,13 +43,13 @@ export class LoginComponent implements OnInit {
 
   ngOnInit(): void {
     this.loginFormGroup = this.initiateFormGroup();
-    // this.weatherService.getIp().subscribe((id: any) => {
-    //   this.weatherService.get(id.ip).subscribe((dt: WeatherForecast) => {
-    //     this.data = dt;
-    //     this.sunrise = new Date(1000 * this.data.sys.sunrise);
-    //     this.sunset = new Date(1000 * this.data.sys.sunset);
-    //   });
-    // });
+    this.weatherService.getIp().subscribe((id: any) => {
+      this.weatherService.get(id.ip).subscribe((dt: WeatherForecast) => {
+        this.data = dt;
+        this.sunrise = new Date(1000 * this.data.sys.sunrise);
+        this.sunset = new Date(1000 * this.data.sys.sunset);
+      });
+    });
     this.newsService.getNews().subscribe((dt: any) => {
       this.news = dt;
     });
@@ -110,5 +110,15 @@ export class LoginComponent implements OnInit {
       password: new FormControl('', Validators.required),
     });
     return formGroup;
+  }
+
+  login() {
+    const controls = this.loginFormGroup.controls;
+    Object.keys(controls).forEach((controlName) =>
+      controls[controlName].markAsTouched()
+    );
+    if (this.loginFormGroup.valid) {
+      this.authService.login(this.loginFormGroup.get('userName').value, this.loginFormGroup.get('password').value);
+    }
   }
 }

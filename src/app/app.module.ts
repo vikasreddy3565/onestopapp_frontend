@@ -19,11 +19,16 @@ import { WeatherService } from './service/weather.service';
 import { HttpTokenService } from './service/httptoken.service';
 import { MovieService } from './service/movie.service';
 import { NewsService } from './service/news.service';
+import { RegisterComponent } from './user/registration/registration.component';
+import { PanelModule } from 'primeng';
+import { RegisterUserService } from './service/registration.service';
+import { UserModule } from './user/user.module';
 
 @NgModule({
   declarations: [AppComponent],
   imports: [
     LoginModule,
+    UserModule,
     HeaderModule,
     BrowserModule,
     AppRoutingModule,
@@ -33,6 +38,7 @@ import { NewsService } from './service/news.service';
     FormsModule,
     ReactiveFormsModule,
     MaterialPrimengModule,
+    PanelModule
   ],
   providers: [
     MessageService,
@@ -43,6 +49,7 @@ import { NewsService } from './service/news.service';
     WeatherService,
     MovieService,
     NewsService,
+    RegisterUserService,
     { provide: OSA_WEBAPI_LISTENER_URL, useValue: environment.webApiEndPoint },
   ],
   bootstrap: [AppComponent],

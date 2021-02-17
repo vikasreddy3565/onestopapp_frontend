@@ -24,7 +24,7 @@ export class AuthenticationService {
     jwtParams.grantType = 'password';
     jwtParams.refreshToken = null;
     const body = JSON.stringify(jwtParams);
-    const url = environment.webApiEndPoint + 'token/authenticate';
+    const url = environment.webApiEndPoint + 'auth/Authenticate';
     const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
     return this.http
       .post(url, body, { headers })

@@ -1,0 +1,17 @@
+#registerUser {
+    .ui-grid-row
+    {
+        padding: 5px;
+    }
+    .text-danger
+    {
+        color: red;
+    }
+    .buttons {
+        float: right;
+    }
+    ::ng-deep .ui-fluid .ui-button {
+        width: 7em !important;
+    }
+
+}

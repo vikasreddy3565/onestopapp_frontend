@@ -110,13 +110,13 @@
                     </div>
                 </div>
                 <div>
-                    <button pButton id="btn_login_cmp_submit_1" type="submit" class="btn btn-single-width btn-login"
+                    <button (click)='login()' pButton id="btn_login_cmp_submit_1" type="submit" class="btn btn-single-width btn-login"
                         icon="fa fa-sign-in" title="Login to One Stop App" label="Login"></button>
                 </div>
             </form><br>
             <div class="link-icon-div">
                 <mat-icon class="mat-icon-margin" aria-hidden="true">person_add</mat-icon>&nbsp;
-                <a id="idUserRegistration" routerLink="/registerDesignee" routerLinkActive="active"
+                <a id="idUserRegistration" routerLink="/registerUser" routerLinkActive="active"
                     title="User Registration">User Registration</a>
             </div>
             <div class="link-icon-div">
