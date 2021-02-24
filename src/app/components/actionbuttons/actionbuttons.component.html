@@ -1,0 +1,21 @@
+<p-footer id="actionButton" *ngIf="buttons">
+    <div class="ui-grid ui-grid-responsive">
+      <div class="ui-grid-row">
+        <div *ngIf="leftButtons.length > 0" class="actionleftbutton" [ngClass]="{'ui-grid-col-6' : leftButtons.length > 0 && rightButtons.length > 0, 'ui-grid-col-12' : leftButtons.length > 0 && rightButtons.length === 0}">
+          <span *ngFor="let action of leftButtons; let i=index">
+            <button id="btn_{{formName}}_{{action.label}}_{{i}}" pButton type="button" icon="{{action.icon}}" [disabled]="action.isDisabled || isHttpRequestInProgress"
+              *ngIf="action.isDisplay" (click)="actionButtonClick(action.eventKey)" title="{{action.title}}" label="{{action.label}}"></button>
+          </span>
+        </div>
+        <div *ngIf="rightButtons.length > 0" class="actionrightbutton" [ngClass]="{'ui-grid-col-6' : leftButtons.length > 0 && rightButtons.length > 0, 'ui-grid-col-12' : leftButtons.length === 0 && rightButtons.length > 0}">
+          <span *ngFor="let action of rightButtons; let i=index">
+            <button id="btn_{{formName}}_{{action.label}}_{{i}}" pButton type="button" icon="{{action.icon}}" [disabled]="action.isDisabled || isHttpRequestInProgress"
+              *ngIf="action.isDisplay" (click)="actionButtonClick(action.eventKey)" title="{{action.title}}" label="{{action.label}}"></button>
+          </span>
+        </div>
+      </div>
+    </div>
+  </p-footer>
+  <p-dialog header="System Use Message" icon="fa fa-info-circle" [(visible)]="displayDialogue" [closable]="false" [closeOnEscape]="false" modal="modal">
+    Please wait while system process your request.
+  </p-dialog>

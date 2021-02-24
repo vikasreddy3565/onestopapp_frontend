@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { WeatherForecast } from 'src/models/weather';
+import { WeatherForecast } from 'src/app/models/weather';
 import { HttpTokenService } from './httptoken.service';
 
 @Injectable()

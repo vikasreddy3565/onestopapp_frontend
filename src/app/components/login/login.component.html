@@ -1,7 +1,8 @@
 <div class="ui-g-3 login-state-div">
     <br>
     <p-panel header="Movies" [toggleable]="false" class="agreement">
-        <p-carousel [value]="moviesNowPlaying" [numVisible]="2"  [numScroll]="1" [circular]="true" [autoplayInterval]="3000">
+        <p-carousel [value]="moviesNowPlaying" [numVisible]="2" [numScroll]="1" [circular]="true"
+            [autoplayInterval]="3000">
             <ng-template pTemplate="header">
                 <h5>Basic</h5>
             </ng-template>
@@ -9,7 +10,8 @@
                 <div class="product-item">
                     <div class="product-item-content">
                         <div class="p-mb-3">
-                            <img src="https://image.tmdb.org/t/p/w500/{{product.poster_path}}" [alt]="product.original_title" class="product-image" />
+                            <img src="https://image.tmdb.org/t/p/w500/{{product.poster_path}}"
+                                [alt]="product.original_title" class="product-image" />
                         </div>
                         <div>
                             <h5 class="p-mb-1">Release Date: {{product.release_date}}</h5>
@@ -20,51 +22,12 @@
             </ng-template>
         </p-carousel>
     </p-panel>
-    <!-- <p-panel header="Technology" [toggleable]="false" class="agreement">
-       <p-carousel [value]="nowPlaying" [numVisible]="2"  [numVisible]="2" [numScroll]="1" [circular]="true" [autoplayInterval]="3000">
-            <ng-template pTemplate="header">
-                <h5>Basic</h5>
-            </ng-template>
-            <ng-template let-product pTemplate="item">
-                <div class="product-item">
-                    <div class="product-item-content">
-                        <div class="p-mb-3">
-                            <img src="https://image.tmdb.org/t/p/w200/{{product.poster_path}}" [alt]="product.original_title" class="product-image" />
-                        </div>
-                        <div>
-                            <h6 class="p-mb-1">Release Date: {{product.release_date}}</h6>
-                            <h4 class="p-mb-1">Rating: {{product.vote_average}}</h4>
-                        </div>
-                    </div>
-                </div>
-            </ng-template>
-        </p-carousel>
-    </p-panel> -->
-    <!-- <p-panel header="Movies" [toggleable]="false" class="agreement">
-        <p-carousel [value]="nowPlaying" [numVisible]="2"  [numVisible]="2" [numScroll]="1" [circular]="true" [autoplayInterval]="3000">
-            <ng-template pTemplate="header">
-                <h5>Basic</h5>
-            </ng-template>
-            <ng-template let-product pTemplate="item">
-                <div class="product-item">
-                    <div class="product-item-content">
-                        <div class="p-mb-3">
-                            <img src="https://image.tmdb.org/t/p/w200/{{product.poster_path}}" [alt]="product.original_title" class="product-image" />
-                        </div>
-                        <div>
-                            <h6 class="p-mb-1">Release Date: {{product.release_date}}</h6>
-                            <h4 class="p-mb-1">Rating: {{product.vote_average}}</h4>
-                        </div>
-                    </div>
-                </div>
-            </ng-template>
-        </p-carousel>
-    </p-panel> -->
 </div>
 <div class="ui-g-3 login-state-div" *ngIf="news">
     <br>
     <p-panel header="News" [toggleable]="false" class="agreement">
-        <p-carousel [value]="news.articles" [numVisible]="1"  [numScroll]="1" [circular]="true" [autoplayInterval]="3000">
+        <p-carousel [value]="news.articles" [numVisible]="1" [numScroll]="1" [circular]="true"
+            [autoplayInterval]="3000">
             <ng-template pTemplate="header">
                 <h5>Basic</h5>
             </ng-template>
@@ -109,10 +72,18 @@
                         <span *ngIf="loginFormGroup.controls.password.errors.required">Password is required.</span>
                     </div>
                 </div>
-                <div>
-                    <button (click)='login()' pButton id="btn_login_cmp_submit_1" type="submit" class="btn btn-single-width btn-login"
-                        icon="fa fa-sign-in" title="Login to One Stop App" label="Login"></button>
-                </div>
+                    <div class="ui-grid-row">
+                        <div class="ui-grid-col-6">
+                            <button (click)='login()' pButton id="btn_login_cmp_submit_1" type="submit"
+                                class="btn btn-single-width btn-login" icon="fa fa-sign-in"
+                                title="Login to One Stop App" label="Login"></button>
+                        </div>
+                        <div class="ui-grid-col-6">
+                            <mat-icon class="mat-icon-margin" aria-hidden="true">navigate_next</mat-icon>&nbsp;
+                            <a id="id_ForgotPassword" routerLink="/forgotPassword" routerLinkActive="active"
+                                title="Forgot Password">Continue as guest</a>
+                        </div>
+                    </div>
             </form><br>
             <div class="link-icon-div">
                 <mat-icon class="mat-icon-margin" aria-hidden="true">person_add</mat-icon>&nbsp;
@@ -134,13 +105,13 @@
     <div *ngIf="data">
         <p-fieldset class="loginlegend" legend="Weather">
             <div class="ui-grid-row weather-div">
-                    <label for="humidity">Humidity: </label>&nbsp;&nbsp;{{data.main.humidity}}
+                <label for="humidity">Humidity: </label>&nbsp;&nbsp;{{data.main.humidity}}
             </div>
             <div class="ui-grid-row login-pw-div">
-                    <label for="sunset">Sunrise: </label>&nbsp;&nbsp;{{sunrise}}
+                <label for="sunset">Sunrise: </label>&nbsp;&nbsp;{{sunrise}}
             </div>
             <div class="ui-grid-row login-pw-div">
-                    <label for="sunset">Sunset:</label>&nbsp;&nbsp;{{sunset}}
+                <label for="sunset">Sunset:</label>&nbsp;&nbsp;{{sunset}}
             </div>
         </p-fieldset>
     </div>

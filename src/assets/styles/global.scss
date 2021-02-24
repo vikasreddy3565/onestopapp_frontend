@@ -1,0 +1,93 @@
+/* overwrite user agent stylesheet */
+address {
+    font-style: normal;
+}
+
+/* width */
+.inputwidth-10em {
+    width: 10em !important;
+}
+.inputwidth-12em {
+    width: 12em !important;
+}
+.width-100p {
+    width: 100%;
+}
+/* margin and Padding */
+.no-padding {
+    padding: 0 0 !important;
+}
+.margin-top-01em {
+    margin-top: 0.1em;
+}
+
+.margin-top-02em {
+    margin-top: 0.2em;
+}
+.display-block {
+    display: block;
+}
+.display-flex {
+    display: flex;
+}
+.display-inlineflex {
+    display: inline-flex;
+}
+.border-bottom {
+    border-bottom: 1px solid gray;
+}
+.border-top {
+    border-top: 1px solid gray;
+}
+.first-radio-width {
+    margin-left: -15px;
+}
+/* padding */
+.padding-right-1em {
+    padding-right: 1em;
+}
+.padding-left-1em {
+    padding-left: 1em;
+}
+.padding-left-1hem {
+    padding-left: 1.5em;
+}
+.padding-left-2em {
+    padding-left: 2em;
+}
+.padding-btn-small {
+    padding: 0.25em .1em 0.25em 1.8em !important;
+}
+.text-align-center {
+    text-align: center;
+}
+.font-bold {
+    font-weight: bold;
+}
+.font-weight-normal {
+    font-weight: normal;
+}
+.margin-top-1em {
+    margin-top: 1em;
+}
+.max-width-pdd-mobile {
+    width: 100%;
+    max-width: 15em;
+}
+/* mouse hover */
+.cursor-pointer {
+    cursor: pointer;
+}
+
+@media (max-width: 40em) {
+
+    .max-width-pdd-mobile {
+        max-width: 13em;
+    }
+}
+@media (max-width: 35em) {
+    .ui-datatable-reflow .ui-datatable-data>tr>td {
+        // display: flex !important; // Temp solution but need to recall to fix other, do not remove for now.
+    }
+}
+

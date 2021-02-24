@@ -5,7 +5,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { LoginRoutingModule } from './login-routing.module';
 import { HeaderModule } from '../header/header.module';
 import { ReactiveFormsModule } from '@angular/forms';
-import { MaterialPrimengModule } from '../material.primeng.module';
+import { MaterialPrimengModule } from '../../material.primeng.module';
 @NgModule({
     imports: [
         ReactiveFormsModule,

@@ -7,7 +7,6 @@ export class RegisterUser {
   userName: string;
   password: string;
   confirmPasword: string;
-  SecurityQuestionId: number;
-  answer: string;
+  countryId: number;
   constructor() {}
 }

@@ -8,7 +8,9 @@ import {
 import { Router } from '@angular/router';
 import { SelectItem, MessageService as ToastService } from 'primeng';
 import { RegisterUserService } from 'src/app/service/registration.service';
-import { RegisterUser } from 'src/models/registerUser';
+import { WeatherService } from 'src/app/service/weather.service';
+import { Countries } from 'src/app/models/countries';
+import { RegisterUser } from 'src/app/models/registerUser';
 import { RegularExpressions } from 'src/utils/regularexpressions';
 
 @Component({
@@ -19,7 +21,7 @@ import { RegularExpressions } from 'src/utils/regularexpressions';
 export class RegisterComponent implements OnInit {
   registerFormGroup: FormGroup;
   registerDesignee: RegisterUser;
-  securityQuestionTypes: SelectItem[] = [];
+  countries: SelectItem[] = [];
   formSubmitted = false;
   passwordMatchFlg = false;
   passwordMatchMessage = '';
@@ -38,7 +40,8 @@ export class RegisterComponent implements OnInit {
     private registerUserService: RegisterUserService,
     private router: Router,
     private el: ElementRef,
-    private toastService: ToastService
+    private toastService: ToastService,
+    private weatherService: WeatherService
   ) {}
   async ngOnInit() {
     this.registerDesignee = new RegisterUser();
@@ -76,10 +79,24 @@ export class RegisterComponent implements OnInit {
       confirmPasword: new FormControl(this.registerDesignee.confirmPasword, [
         Validators.required,
       ]),
+      countryId: new FormControl(this.registerDesignee.countryId, [
+        Validators.required,
+      ]),
+    });
+    this.registerUserService.getCountries().subscribe((dt: Countries[]) => {
+      const data = dt;
+      if (dt.length > 0) {
+        const list: SelectItem[] = [];
+        list.push({ label: '- Select -', value: null });
+        dt.forEach((e: Countries) => {
+          list.push({ label: e.name, value: e.id });
+        });
+        this.countries = list;
+      }
     });
   }
 
-  onSubmit(designeeRegister) {
+  onSubmit() {
     this.formSubmitted = true;
     const formValidationFailed =
       this.userNameExistFlg ||
@@ -94,9 +111,9 @@ export class RegisterComponent implements OnInit {
       this.registerUserService
         .createRegisterDesignee(this.registerDesignee)
         .subscribe(
-          (data) => {
+          () => {
             this.toastService.add({
-              key: 'dms',
+              key: 'onestop',
               severity: 'success',
               summary: 'User Registration',
               detail: 'Your account has been created successfully!',
@@ -107,7 +124,7 @@ export class RegisterComponent implements OnInit {
           },
           (error) => {
             this.toastService.add({
-              key: 'dms',
+              key: 'onestop',
               severity: 'error',
               summary: 'Error Message',
               detail: 'Account creation unsuccessful, please try again.',

@@ -7,8 +7,8 @@ import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MaterialPrimengModule } from './material.primeng.module';
-import { LoginModule } from './login/login.module';
-import { HeaderModule } from './header/header.module';
+import { LoginModule } from './components/login/login.module';
+import { HeaderModule } from './components/header/header.module';
 import { MessageService } from 'primeng/api';
 import { OSA_WEBAPI_LISTENER_URL } from './models/export.model';
 import { environment } from 'src/environments/environment';
@@ -19,10 +19,10 @@ import { WeatherService } from './service/weather.service';
 import { HttpTokenService } from './service/httptoken.service';
 import { MovieService } from './service/movie.service';
 import { NewsService } from './service/news.service';
-import { RegisterComponent } from './user/registration/registration.component';
+import { RegisterComponent } from './components/user/registration/registration.component';
 import { PanelModule } from 'primeng';
 import { RegisterUserService } from './service/registration.service';
-import { UserModule } from './user/user.module';
+import { UserModule } from './components/user/user.module';
 
 @NgModule({
   declarations: [AppComponent],

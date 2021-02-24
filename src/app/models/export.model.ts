@@ -28,3 +28,40 @@ export class User {
   messageCount: number;
   constructor() {}
 }
+
+export class ActionButton {
+  label: string;
+  title: string;
+  eventKey: string;
+  isDisplay: boolean;
+  isDisabled: boolean;
+  displayOrder: number;
+  icon: string;
+  align: string;
+  constructor(
+    label?: string,
+    title?: string,
+    eventKey?: string,
+    isDisplay?: boolean,
+    isDisabled?: boolean,
+    displayOrder?: number,
+    icon?: string,
+    align?: string
+  ) {
+    this.label = label;
+    this.title = title;
+    this.eventKey = eventKey;
+    this.isDisplay = isDisplay;
+    this.isDisabled = isDisabled;
+    this.displayOrder = displayOrder;
+    this.icon = icon;
+    this.align = align != null ? align : 'right';
+  }
+}
+export enum ButtonActionsEnum {
+  Submit = 'submit',
+  Save = 'save',
+  Cancel = 'cancel',
+  Back = 'back',
+  Print = 'print',
+}

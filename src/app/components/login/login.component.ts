@@ -5,11 +5,11 @@ import {
   FormGroup,
   Validators,
 } from '@angular/forms';
-import { WeatherForecast } from 'src/models/weather';
-import { AuthenticationService } from '../service/auth.service';
-import { MovieService } from '../service/movie.service';
-import { NewsService } from '../service/news.service';
-import { WeatherService } from '../service/weather.service';
+import { WeatherForecast } from 'src/app/models/weather';
+import { AuthenticationService } from '../../service/auth.service';
+import { MovieService } from '../../service/movie.service';
+import { NewsService } from '../../service/news.service';
+import { WeatherService } from '../../service/weather.service';
 
 @Component({
   selector: 'app-login',

@@ -5,7 +5,7 @@
 </div>
 <div id="registerUser" *ngIf=" registerFormGroup">
     <h4 class="required-msg"><span class="text-danger">*</span> Indicates required field.</h4>
-    <form [formGroup]="registerFormGroup" (ngSubmit)="onSubmit(registerFormGroup.value)">
+    <form [formGroup]="registerFormGroup" (ngSubmit)="onSubmit()">
         <p-panel header="Registration">
             <div class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid">
                 <div class="ui-grid-row">
@@ -56,11 +56,6 @@
                         </div>
                     </div>
                 </div>
-            </div>
-        </p-panel>
-        <br />
-        <p-panel header="Security Information" class="agreement">
-            <div class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid">
                 <div class="ui-grid-row">
                     <div class="ui-grid-col-4">
                         Email:
@@ -203,6 +198,23 @@
                             <span>
                                 {{passwordMatchMessage}}
                             </span>
+                        </div>
+                    </div>
+                </div>
+                <div class="ui-grid-row">
+                    <div class="ui-grid-col-4">
+                        Country:
+                        <span class="text-danger">*</span>
+                    </div>
+                    <div class="ui-grid-col-5">
+                        <p-dropdown inputId="id_reguser_pdd_countryid" [options]="countries" [filter]="true"
+                            formControlName="countryId" autoWidth="false" [style]="{'width':'60%'}"
+                            placeholder="Select a Country"></p-dropdown>
+                    </div>
+                    <div class="ui-grid-col-3">
+                        <div class="ui-message ui-message-error ui-corner-all"
+                            *ngIf="!registerFormGroup.controls['countryId'].valid && (registerFormGroup.controls['countryId'].touched || formSubmitted)">
+                            Country is required
                         </div>
                     </div>
                 </div>
