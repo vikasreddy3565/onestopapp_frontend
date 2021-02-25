@@ -1,235 +1,237 @@
 <header></header>
 <div class="page-title-div">
-    <mat-icon class="mat-icon-margin-h2" aria-hidden="true">person_add</mat-icon>
-    <h2 class="page-title-h2">User Registration</h2>
+  <mat-icon class="mat-icon-margin-h2" aria-hidden="true">person_add</mat-icon>
+  <h2 class="page-title-h2">User Registration</h2>
 </div>
 <div id="registerUser" *ngIf=" registerFormGroup">
-    <h4 class="required-msg"><span class="text-danger">*</span> Indicates required field.</h4>
-    <form [formGroup]="registerFormGroup" (ngSubmit)="onSubmit()">
-        <p-panel header="Registration">
-            <div class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid">
-                <div class="ui-grid-row">
-                    <div class="ui-grid-col-4">
-                        First Name:
-                        <span class="text-danger">*</span>
-                    </div>
-                    <div class="ui-grid-col-5">
-                        <input id="id_FirstName" type="text" maxlength="100" trim formControlName="firstName"
-                            placeholder="First Name" />
-                    </div>
-                    <div class="ui-grid-col-3">
-                        <div class="ui-message ui-message-error ui-corner-all" *ngIf="!registerFormGroup.controls['firstName'].valid &&
+  <h4 class="required-msg"><span class="text-danger">*</span> Indicates required field.</h4>
+  <form [formGroup]="registerFormGroup" (ngSubmit)="onSubmit()">
+    <p-panel header="Registration">
+      <div class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid">
+        <div class="ui-grid-row">
+          <div class="ui-grid-col-4">
+            First Name:
+            <span class="text-danger">*</span>
+          </div>
+          <div class="ui-grid-col-5">
+            <input id="id_FirstName" type="text" maxlength="100" trim formControlName="firstName"
+              placeholder="First Name" />
+          </div>
+          <div class="ui-grid-col-3">
+            <div class="ui-message ui-message-error ui-corner-all" *ngIf="!registerFormGroup.controls['firstName'].valid &&
                           (registerFormGroup.controls['firstName'].touched || formSubmitted)">
-                            <span *ngIf="registerFormGroup.controls.firstName.errors.required">
-                                First Name is required.
-                            </span>
-                            <span *ngIf="registerFormGroup.controls.firstName.errors.maxlength">
-                                First Name max length is 50.
-                            </span>
-                            <span *ngIf="registerFormGroup.controls.firstName.errors.pattern">
-                                Only letters, spaces allowed.
-                            </span>
-                        </div>
-                    </div>
-                </div>
-                <div class="ui-grid-row">
-                    <div class="ui-grid-col-4">
-                        Last Name:
-                        <span class="text-danger">*</span>
-                    </div>
-                    <div class="ui-grid-col-5">
-                        <input id="id_LastName" type="text" maxlength="100" trim formControlName="lastName"
-                            placeholder="Last Name" />
-                    </div>
-                    <div class="ui-grid-col-3">
-                        <div class="ui-message ui-message-error ui-corner-all"
-                            *ngIf="!registerFormGroup.controls['lastName'].valid && (registerFormGroup.controls['lastName'].touched  || formSubmitted)">
-                            <span *ngIf="registerFormGroup.controls.lastName.errors.required">
-                                Last Name is required.
-                            </span>
-                            <span *ngIf="registerFormGroup.controls.lastName.errors.maxlength">
-                                Last Name max length is 50.
-                            </span>
-                            <span *ngIf="registerFormGroup.controls.lastName.errors.pattern">
-                                Only letters, spaces allowed.
-                            </span>
-                        </div>
-                    </div>
-                </div>
-                <div class="ui-grid-row">
-                    <div class="ui-grid-col-4">
-                        Email:
-                        <span class="text-danger">*</span>
-                    </div>
-                    <div class="ui-grid-col-5">
-                        <input id="id_Email" type="email" trim maxlength="100" formControlName="email"
-                            (ngModelChange)="checkEmailExist()" placeholder="Email" />
-                    </div>
-                    <div class="ui-grid-col-3">
-                        <div class="ui-message ui-message-error ui-corner-all"
-                            *ngIf="!registerFormGroup.controls['email'].valid && (registerFormGroup.controls['email'].touched || formSubmitted)">
-                            <span *ngIf="registerFormGroup.controls.email.errors.required">
-                                Email is required.
-                            </span>
-                            <span *ngIf="registerFormGroup.controls.email.errors.pattern">
-                                Email is required and format should be
-                                <i>john@doe.com</i>
-                            </span>
-                        </div>
-                        <div class="ui-message ui-message-error ui-corner-all" *ngIf="emailExistFlg">
-                            <span>
-                                {{emailExistMessage}}
-                            </span>
-                        </div>
-                    </div>
-                </div>
-                <div class="ui-grid-row">
-                    <div class="ui-grid-col-4">
-                        Email Confirmation:
-                        <span class="text-danger">*</span>
-                    </div>
-                    <div class="ui-grid-col-5">
-                        <input id="id_EmailConfirmation" type="email" trim maxlength="100"
-                            formControlName="confirmEmail" (ngModelChange)="emailCompare()"
-                            placeholder="Email Confirmation" />
-                    </div>
-                    <div class="ui-grid-col-3">
-                        <div class="ui-message ui-message-error ui-corner-all"
-                            *ngIf="!registerFormGroup.controls['confirmEmail'].valid && (registerFormGroup.controls['confirmEmail'].touched || formSubmitted)">
-                            <span *ngIf="registerFormGroup.controls.confirmEmail.errors.required">
-                                Email Confirmation is required.
-                            </span>
-                            <span *ngIf="registerFormGroup.controls.confirmEmail.errors.pattern">
-                                Email Confirmation format should be
-                                <i>john@doe.com</i>
-                            </span>
-
-                        </div>
-                        <div class="ui-message ui-message-error ui-corner-all" *ngIf="emailMatchFlg">
-                            <span>
-                                {{emailMatchMessage}}
-                            </span>
-                        </div>
-                    </div>
-                </div>
-                <div class="ui-grid-row">
-                    <div class="ui-grid-col-4">
-                        User Name:
-                        <span class="text-danger">*</span>
-                    </div>
-                    <div class="ui-grid-col-5">
-                        <input id="id_UserName" type="text" maxlength="256" trim formControlName="userName"
-                            (ngModelChange)="checkUserNameExist($event)" placeholder="User Name" />
-                    </div>
-                    <div class="ui-grid-col-3">
-                        <div class="ui-message ui-message-error ui-corner-all"
-                            *ngIf="!registerFormGroup.controls['userName'].valid && (registerFormGroup.controls['userName'].touched || formSubmitted)">
-                            <span *ngIf="registerFormGroup.controls.userName.errors.required">
-                                User Name is required.
-                            </span>
-                            <span *ngIf="registerFormGroup.controls.userName.errors.minlength">
-                                User Name min length is 6.
-                            </span>
-                            <span *ngIf="registerFormGroup.controls.userName.errors.maxlength">
-                                User Name max length is 21.
-                            </span>
-                            <span *ngIf="registerFormGroup.controls.userName.errors.pattern">
-                                User Name is invalid
-                            </span>
-                        </div>
-                        <div class="ui-message ui-message-error ui-corner-all" *ngIf="userNameExistFlg">
-                            <span>
-                                {{userNameExistMessage}}
-                            </span>
-                        </div>
-                    </div>
-                </div>
-                <div class="ui-grid-row">
-                    <div class="ui-grid-col-4">
-                        Password:
-                        <span class="text-danger">*</span>
-                    </div>
-                    <div class="ui-grid-col-5">
-                        <input id="id_Password" type="password" maxlength="256" formControlName="password"
-                            (change)="passwordCompare()" placeholder="Password" />
-                        <br />
-                    </div>
-                    <div class="ui-grid-col-3">
-                        <div class="ui-message ui-message-error ui-corner-all"
-                            *ngIf="!registerFormGroup.controls['password'].valid && (registerFormGroup.controls['password'].touched || formSubmitted)">
-                            <span *ngIf="registerFormGroup.controls.password.errors.required">
-                                Password is required.
-                            </span>
-                            <span *ngIf="registerFormGroup.controls.password.errors.pattern">
-                                Password doesn't meet minimum security requirements
-                            </span>
-                        </div>
-                    </div>
-                </div>
-                <div class="ui-grid-row">
-                    <div class="ui-grid-col-4"></div>
-                    <div class="ui-grid-col-8">
-                        <span>
-                            <small>(Password must be a minimum length of 12 characters that includes upper and lower
-                                case characters, numbers and
-                                special characters as follows - at least 1 upper case, at least 1 lower case, at least 1
-                                number, at least 1 special
-                                character, No character can be repeated twice in sequence.)</small>
-                        </span>
-                    </div>
-                </div>
-                <div class="ui-grid-row">
-                    <div class="ui-grid-col-4">
-                        Confirm Password:
-                        <span class="text-danger">*</span>
-                    </div>
-                    <div class="ui-grid-col-5">
-                        <input id="id_ConfirmPassword" type="password" maxlength="256" formControlName="confirmPasword"
-                            (change)="passwordCompare()" placeholder="Confirm Password" />
-                    </div>
-                    <div class="ui-grid-col-3">
-                        <div class="ui-message ui-message-error ui-corner-all"
-                            *ngIf="!registerFormGroup.controls['confirmPasword'].valid && (registerFormGroup.controls['confirmPasword'].touched || formSubmitted)">
-                            <span *ngIf="registerFormGroup.controls.confirmPasword.errors.required">
-                                Confirm Password is required.
-                            </span>
-                        </div>
-                        <div class="ui-message ui-message-error ui-corner-all" *ngIf="passwordMatchFlg">
-                            <span>
-                                {{passwordMatchMessage}}
-                            </span>
-                        </div>
-                    </div>
-                </div>
-                <div class="ui-grid-row">
-                    <div class="ui-grid-col-4">
-                        Country:
-                        <span class="text-danger">*</span>
-                    </div>
-                    <div class="ui-grid-col-5">
-                        <p-dropdown inputId="id_reguser_pdd_countryid" [options]="countries" [filter]="true"
-                            formControlName="countryId" autoWidth="false" [style]="{'width':'60%'}"
-                            placeholder="Select a Country"></p-dropdown>
-                    </div>
-                    <div class="ui-grid-col-3">
-                        <div class="ui-message ui-message-error ui-corner-all"
-                            *ngIf="!registerFormGroup.controls['countryId'].valid && (registerFormGroup.controls['countryId'].touched || formSubmitted)">
-                            Country is required
-                        </div>
-                    </div>
-                </div>
+              <span *ngIf="registerFormGroup.controls.firstName.errors.required">
+                First Name is required.
+              </span>
+              <span *ngIf="registerFormGroup.controls.firstName.errors.maxlength">
+                First Name max length is 50.
+              </span>
+              <span *ngIf="registerFormGroup.controls.firstName.errors.pattern">
+                Only letters, spaces allowed.
+              </span>
             </div>
-        </p-panel>
-        <br />
-        <div class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid">
-            <div class="ui-grid-row buttons">
-                <div class="ui-grid-col-12">
-                    <button pButton id="btn_submit" type="submit" class="btn btn-single-width" icon="fa fa-floppy-o"
-                        title="Submit user information" label="Submit"></button>
-                    <button pButton id="btn_cancel" type="button" (click)="cancelRegistration()"
-                        class="btn-single-width" icon="fa fa-home" title="Cancel" label="Cancel"></button>
-                </div>
-            </div>
+          </div>
         </div>
-    </form>
+        <div class="ui-grid-row">
+          <div class="ui-grid-col-4">
+            Last Name:
+            <span class="text-danger">*</span>
+          </div>
+          <div class="ui-grid-col-5">
+            <input id="id_LastName" type="text" maxlength="100" trim formControlName="lastName"
+              placeholder="Last Name" />
+          </div>
+          <div class="ui-grid-col-3">
+            <div class="ui-message ui-message-error ui-corner-all"
+              *ngIf="!registerFormGroup.controls['lastName'].valid && (registerFormGroup.controls['lastName'].touched  || formSubmitted)">
+              <span *ngIf="registerFormGroup.controls.lastName.errors.required">
+                Last Name is required.
+              </span>
+              <span *ngIf="registerFormGroup.controls.lastName.errors.maxlength">
+                Last Name max length is 50.
+              </span>
+              <span *ngIf="registerFormGroup.controls.lastName.errors.pattern">
+                Only letters, spaces allowed.
+              </span>
+            </div>
+          </div>
+        </div>
+        <div class="ui-grid-row">
+          <div class="ui-grid-col-4">
+            Email:
+            <span class="text-danger">*</span>
+          </div>
+          <div class="ui-grid-col-5">
+            <input id="id_Email" type="email" trim maxlength="100" formControlName="email"
+              (ngModelChange)="checkEmailExist()" placeholder="Email" />
+          </div>
+          <div class="ui-grid-col-3">
+            <div class="ui-message ui-message-error ui-corner-all"
+              *ngIf="!registerFormGroup.controls['email'].valid && (registerFormGroup.controls['email'].touched || formSubmitted)">
+              <span *ngIf="registerFormGroup.controls.email.errors.required">
+                Email is required.
+              </span>
+              <span *ngIf="registerFormGroup.controls.email.errors.pattern">
+                Email is required and format should be
+                <i>john@doe.com</i>
+              </span>
+            </div>
+            <div class="ui-message ui-message-error ui-corner-all" *ngIf="emailExistFlg">
+              <span>
+                {{emailExistMessage}}
+              </span>
+            </div>
+          </div>
+        </div>
+        <div class="ui-grid-row">
+          <div class="ui-grid-col-4">
+            Email Confirmation:
+            <span class="text-danger">*</span>
+          </div>
+          <div class="ui-grid-col-5">
+            <input id="id_EmailConfirmation" type="email" trim maxlength="100" formControlName="confirmEmail"
+              (ngModelChange)="emailCompare()" placeholder="Email Confirmation" />
+          </div>
+          <div class="ui-grid-col-3">
+            <div class="ui-message ui-message-error ui-corner-all"
+              *ngIf="!registerFormGroup.controls['confirmEmail'].valid && (registerFormGroup.controls['confirmEmail'].touched || formSubmitted)">
+              <span *ngIf="registerFormGroup.controls.confirmEmail.errors.required">
+                Email Confirmation is required.
+              </span>
+              <span *ngIf="registerFormGroup.controls.confirmEmail.errors.pattern">
+                Email Confirmation format should be
+                <i>john@doe.com</i>
+              </span>
+
+            </div>
+            <div class="ui-message ui-message-error ui-corner-all" *ngIf="emailMatchFlg">
+              <span>
+                {{emailMatchMessage}}
+              </span>
+            </div>
+          </div>
+        </div>
+        <div class="ui-grid-row">
+          <div class="ui-grid-col-4">
+            User Name:
+            <span class="text-danger">*</span>
+          </div>
+          <div class="ui-grid-col-5">
+            <input id="id_UserName" type="text" maxlength="256" trim formControlName="userName"
+              (ngModelChange)="checkUserNameExist($event)" placeholder="User Name" />
+          </div>
+          <div class="ui-grid-col-3">
+            <div class="ui-message ui-message-error ui-corner-all"
+              *ngIf="!registerFormGroup.controls['userName'].valid && (registerFormGroup.controls['userName'].touched || formSubmitted)">
+              <span *ngIf="registerFormGroup.controls.userName.errors.required">
+                User Name is required.
+              </span>
+              <span *ngIf="registerFormGroup.controls.userName.errors.minlength">
+                User Name min length is 6.
+              </span>
+              <span *ngIf="registerFormGroup.controls.userName.errors.maxlength">
+                User Name max length is 21.
+              </span>
+              <span *ngIf="registerFormGroup.controls.userName.errors.pattern">
+                User Name is invalid
+              </span>
+            </div>
+            <div class="ui-message ui-message-error ui-corner-all" *ngIf="userNameExistFlg">
+              <span>
+                {{userNameExistMessage}}
+              </span>
+            </div>
+          </div>
+        </div>
+        <div class="ui-grid-row">
+          <div class="ui-grid-col-4">
+            Password:
+            <span class="text-danger">*</span>
+          </div>
+          <div class="ui-grid-col-5">
+            <input id="id_Password" [type]="hide ? 'password' : 'text'" maxlength="256" formControlName="password"
+              (change)="passwordCompare()" placeholder="Password" />&nbsp;
+            <!-- <div class="ui-grid-col-1">
+              <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility_off' :
+                'visibility'}}</mat-icon>
+            </div> -->
+          </div>
+          <div class="ui-grid-col-3">
+            <div class="ui-message ui-message-error ui-corner-all"
+              *ngIf="!registerFormGroup.controls['password'].valid && (registerFormGroup.controls['password'].touched || formSubmitted)">
+              <span *ngIf="registerFormGroup.controls.password.errors.required">
+                Password is required.
+              </span>
+              <span *ngIf="registerFormGroup.controls.password.errors.pattern">
+                Password doesn't meet minimum security requirements
+              </span>
+            </div>
+          </div>
+        </div>
+        <div class="ui-grid-row">
+          <div class="ui-grid-col-4"></div>
+          <div class="ui-grid-col-8">
+            <span>
+              <small>(Password must be a minimum length of 12 characters that includes upper and lower
+                case characters, numbers and
+                special characters as follows - at least 1 upper case, at least 1 lower case, at least 1
+                number, at least 1 special
+                character, No character can be repeated twice in sequence.)</small>
+            </span>
+          </div>
+        </div>
+        <div class="ui-grid-row">
+          <div class="ui-grid-col-4">
+            Confirm Password:
+            <span class="text-danger">*</span>
+          </div>
+          <div class="ui-grid-col-5">
+            <input id="id_ConfirmPassword" [type]="hide ? 'password' : 'text'" maxlength="256"
+              formControlName="confirmPasword" (change)="passwordCompare()" placeholder="Confirm Password" />
+          </div>
+          <div class="ui-grid-col-3">
+            <div class="ui-message ui-message-error ui-corner-all"
+              *ngIf="!registerFormGroup.controls['confirmPasword'].valid && (registerFormGroup.controls['confirmPasword'].touched || formSubmitted)">
+              <span *ngIf="registerFormGroup.controls.confirmPasword.errors.required">
+                Confirm Password is required.
+              </span>
+            </div>
+            <div class="ui-message ui-message-error ui-corner-all" *ngIf="passwordMatchFlg">
+              <span>
+                {{passwordMatchMessage}}
+              </span>
+            </div>
+          </div>
+        </div>
+        <div class="ui-grid-row">
+          <div class="ui-grid-col-4">
+            Country:
+            <span class="text-danger">*</span>
+          </div>
+          <div class="ui-grid-col-5">
+            <p-dropdown inputId="id_reguser_pdd_countryid" [options]="countries" [filter]="true"
+              formControlName="countryId" autoWidth="false" [style]="{'width':'60%'}" placeholder="Select a Country">
+            </p-dropdown>
+          </div>
+          <div class="ui-grid-col-3">
+            <div class="ui-message ui-message-error ui-corner-all"
+              *ngIf="!registerFormGroup.controls['countryId'].valid && (registerFormGroup.controls['countryId'].touched || formSubmitted)">
+              Country is required
+            </div>
+          </div>
+        </div>
+      </div>
+    </p-panel>
+    <br />
+    <div class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid">
+      <div class="ui-grid-row buttons">
+        <div class="ui-grid-col-12">
+          <button pButton id="btn_submit" type="submit" class="btn btn-single-width" icon="fa fa-floppy-o"
+            title="Submit user information" label="Submit"></button>
+          <button pButton id="btn_cancel" type="button" (click)="cancelRegistration()" class="btn-single-width"
+            icon="fa fa-home" title="Cancel" label="Cancel"></button>
+        </div>
+      </div>
+    </div>
+  </form>
 </div>

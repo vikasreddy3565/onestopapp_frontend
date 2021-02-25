@@ -9,7 +9,7 @@ import { WeatherForecast } from 'src/app/models/weather';
 import { AuthenticationService } from '../../service/auth.service';
 import { MovieService } from '../../service/movie.service';
 import { NewsService } from '../../service/news.service';
-import { WeatherService } from '../../service/weather.service';
+import { MessageService as ToastService } from 'primeng';
 
 @Component({
   selector: 'app-login',
@@ -31,33 +31,39 @@ export class LoginComponent implements OnInit {
   value = 0;
   thumbLabel = true;
   tickInterval = 10;
-
+  formSubmitted = false;
   totalResults: any;
-  constructor(
-    private fb: FormBuilder,
-    private weatherService: WeatherService,
+  errors: boolean;
+  router: any;
+  errorMessage: string;
+  displayDialogue: boolean;
+  loadAPI: Promise<unknown>;
+  constructor(private fb: FormBuilder,
     private movieService: MovieService,
     private newsService: NewsService,
-    private authService: AuthenticationService
-  ) {}
+    private authService: AuthenticationService, private toastService: ToastService
+  ) { }
 
   ngOnInit(): void {
     this.loginFormGroup = this.initiateFormGroup();
-    this.weatherService.getIp().subscribe((id: any) => {
-      this.weatherService.get(id.ip).subscribe((dt: WeatherForecast) => {
-        this.data = dt;
-        this.sunrise = new Date(1000 * this.data.sys.sunrise);
-        this.sunset = new Date(1000 * this.data.sys.sunset);
-      });
+    this.loadAPI = new Promise(() => {
+      console.log('resolving promise...');
+      this.loadScript();
     });
+    // this.weatherService.getIp().subscribe((id: any) => {
+    //   this.weatherService.get(id.ip).subscribe((dt: WeatherForecast) => {
+    //     this.data = dt;
+    //     this.sunrise = new Date(1000 * this.data.sys.sunrise);
+    //     this.sunset = new Date(1000 * this.data.sys.sunset);
+    //   });
+    // });
     this.newsService.getNews().subscribe((dt: any) => {
       this.news = dt;
+      this.news.articles = this.news.articles.slice(0, 5);
     });
-    this.authService.getCountries().subscribe((dt: any) => {
-      const c = dt;
+    this.authService.getCountries().subscribe(() => {
     });
-    this.movieService.getGenres().subscribe((dt: any) => {
-      const gen = dt;
+    this.movieService.getGenres().subscribe(() => {
     });
     this.movieService.getNowPlaying(1).subscribe((res) => {
       this.totalResults = res.total_results;
@@ -70,7 +76,23 @@ export class LoginComponent implements OnInit {
         )} ${date.getDate()} ${date.getFullYear()}`;
         this.moviesNowPlaying.push(np);
       });
+      this.moviesNowPlaying = this.moviesNowPlaying.slice(0, 5);
     });
+    this.displayDialogue = true;
+  }
+
+  public loadScript() {
+    console.log('preparing to load...')
+    let node = document.createElement('script');
+    node.src = 'https://apps.elfsight.com/p/platform.js';
+    node.type = 'text/javascript';
+    node.async = true;
+    node.charset = 'utf-8';
+    document.getElementsByTagName('head')[0].appendChild(node);
+  }
+
+  closeWindow() {
+    this.displayDialogue = false;
   }
 
   setMonth(month: number) {
@@ -113,12 +135,22 @@ export class LoginComponent implements OnInit {
   }
 
   login() {
+    this.formSubmitted = true;
     const controls = this.loginFormGroup.controls;
     Object.keys(controls).forEach((controlName) =>
       controls[controlName].markAsTouched()
     );
     if (this.loginFormGroup.valid) {
-      this.authService.login(this.loginFormGroup.get('userName').value, this.loginFormGroup.get('password').value);
+      this.authService.login(this.loginFormGroup.get('userName').value, this.loginFormGroup.get('password').value).then(authResult => {
+        if (authResult.isAuthenticated === true) {
+          this.errors = false;
+          this.router.navigate(['//home']);
+        } else {
+          this.errors = true;
+          this.errorMessage = authResult.message;
+          this.toastService.add({ key: 'onestop', severity: 'error', summary: 'Info Message', detail: authResult.message });
+        }
+      });;
     }
   }
 }

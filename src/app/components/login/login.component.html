@@ -1,118 +1,154 @@
 <div class="ui-g-3 login-state-div">
-    <br>
-    <p-panel header="Movies" [toggleable]="false" class="agreement">
-        <p-carousel [value]="moviesNowPlaying" [numVisible]="2" [numScroll]="1" [circular]="true"
-            [autoplayInterval]="3000">
-            <ng-template pTemplate="header">
-                <h5>Basic</h5>
-            </ng-template>
-            <ng-template let-product pTemplate="item">
-                <div class="product-item">
-                    <div class="product-item-content">
-                        <div class="p-mb-3">
-                            <img src="https://image.tmdb.org/t/p/w500/{{product.poster_path}}"
-                                [alt]="product.original_title" class="product-image" />
-                        </div>
-                        <div>
-                            <h5 class="p-mb-1">Release Date: {{product.release_date}}</h5>
-                            <h4 class="p-mb-1">Rating: {{product.vote_average}}</h4>
-                        </div>
-                    </div>
-                </div>
-            </ng-template>
-        </p-carousel>
-    </p-panel>
+  <br>
+  <p-panel header="Movies" [toggleable]="false" class="agreement">
+    <p-carousel [value]="moviesNowPlaying" [numVisible]="1" [numScroll]="1" [circular]="true" [autoplayInterval]="5000">
+      <ng-template pTemplate="header">
+        <h5>Basic</h5>
+      </ng-template>
+      <ng-template let-product pTemplate="item">
+        <div class="product-item">
+          <div class="product-item-content">
+            <div class="p-mb-3">
+              <img style="width: 200pt;" src="https://image.tmdb.org/t/p/w500/{{product.poster_path}}"
+                [alt]="product.original_title" class="product-image" />
+            </div>
+            <div>
+              <h5 class="p-mb-1">Release Date: {{product.release_date}}</h5>
+              <h4 class="p-mb-1">Rating: {{product.vote_average}}</h4>
+            </div>
+          </div>
+        </div>
+      </ng-template>
+    </p-carousel>
+  </p-panel>
 </div>
 <div class="ui-g-3 login-state-div" *ngIf="news">
-    <br>
-    <p-panel header="News" [toggleable]="false" class="agreement">
-        <p-carousel [value]="news.articles" [numVisible]="1" [numScroll]="1" [circular]="true"
-            [autoplayInterval]="3000">
-            <ng-template pTemplate="header">
-                <h5>Basic</h5>
-            </ng-template>
-            <ng-template let-product pTemplate="item">
-                <div class="product-item">
-                    <div class="product-item-content">
-                        <div class="p-mb-3">
-                            <img src="{{product.urlToImage}}" [alt]="product.description" class="product-image" />
-                        </div>
-                        <div>
-                            <h5 class="p-mb-1">Description: {{product.description}}</h5>
-                        </div>
-                    </div>
-                </div>
-            </ng-template>
-        </p-carousel>
-    </p-panel>
+  <br>
+  <p-panel header="News" [toggleable]="false" class="agreement">
+    <p-carousel [value]="news.articles" [numVisible]="1" [numScroll]="1" [circular]="true" [autoplayInterval]="5000">
+      <ng-template pTemplate="header">
+        <h5>Basic</h5>
+      </ng-template>
+      <ng-template let-product pTemplate="item">
+        <div class="product-item">
+          <div class="product-item-content">
+            <div class="p-mb-3">
+              <img src="{{product.urlToImage}}" [alt]="product.description" class="product-image" />
+            </div>
+            <div>
+              <h5 class="p-mb-1">Description: {{product.description}}</h5>
+            </div>
+          </div>
+        </div>
+      </ng-template>
+    </p-carousel>
+  </p-panel>
 </div>
+<!-- <div class="ui-g-3 login-state-div" *ngIf="news">
+  <br>
+  <p-panel header="Technology" [toggleable]="false" class="agreement">
+    <p-carousel [value]="news.articles" [numVisible]="1" [numScroll]="1" [circular]="true" [autoplayInterval]="5000">
+      <ng-template pTemplate="header">
+        <h5>Basic</h5>
+      </ng-template>
+      <ng-template let-product pTemplate="item">
+        <div class="product-item">
+          <div class="product-item-content">
+            <div class="p-mb-3">
+              <img src="{{product.urlToImage}}" [alt]="product.description" class="product-image" />
+            </div>
+            <div>
+              <h5 class="p-mb-1">Description: {{product.description}}</h5>
+            </div>
+          </div>
+        </div>
+      </ng-template>
+    </p-carousel>
+  </p-panel>
+</div> -->
 <div style="padding-top: 28px;"></div>
 <div class="ui-g-3 login-form-div">
-    <div>
-        <p-fieldset class="loginlegend" legend="Login">
-            <form [formGroup]="loginFormGroup">
-                <div class="ui-grid-row login-username-div">
-                    <span class="ui-float-label">
-                        <input id="userName" type="text" maxlength="256" trim pInputText formControlName="userName" />
-                        <label for="username">Username:</label>
-                    </span>
-                    <div class="ui-message ui-message-error ui-corner-all"
-                        *ngIf="loginFormGroup.get('userName').invalid && (loginFormGroup.controls['userName'].touched)">
-                        <span *ngIf="loginFormGroup.controls.userName.errors.required">User Name is required.</span>
-                    </div>
-                </div>
-                <div class="ui-grid-row login-pw-div">
-                    <span class="ui-float-label">
-                        <input id="password" pPassword type="password" maxlength="256" trim pInputText
-                            formControlName="password" />
-                        <label for="password">Password:</label>
-                    </span>
-                    <div class="ui-message ui-message-error ui-corner-all"
-                        *ngIf="!loginFormGroup.controls['password'].valid && (loginFormGroup.controls['password'].touched)">
-                        <span *ngIf="loginFormGroup.controls.password.errors.required">Password is required.</span>
-                    </div>
-                </div>
-                    <div class="ui-grid-row">
-                        <div class="ui-grid-col-6">
-                            <button (click)='login()' pButton id="btn_login_cmp_submit_1" type="submit"
-                                class="btn btn-single-width btn-login" icon="fa fa-sign-in"
-                                title="Login to One Stop App" label="Login"></button>
-                        </div>
-                        <div class="ui-grid-col-6">
-                            <mat-icon class="mat-icon-margin" aria-hidden="true">navigate_next</mat-icon>&nbsp;
-                            <a id="id_ForgotPassword" routerLink="/forgotPassword" routerLinkActive="active"
-                                title="Forgot Password">Continue as guest</a>
-                        </div>
-                    </div>
-            </form><br>
-            <div class="link-icon-div">
-                <mat-icon class="mat-icon-margin" aria-hidden="true">person_add</mat-icon>&nbsp;
-                <a id="idUserRegistration" routerLink="/registerUser" routerLinkActive="active"
-                    title="User Registration">User Registration</a>
-            </div>
-            <div class="link-icon-div">
-                <mat-icon class="mat-icon-margin" aria-hidden="true">lock_open</mat-icon>&nbsp;
-                <a id="idForgotUsername" routerLink="/forgotUsername" routerLinkActive="active"
-                    title="Forgot Username">Forgot Username</a>
-            </div>
-            <div class="link-icon-div">
-                <mat-icon class="mat-icon-margin" aria-hidden="true">lock</mat-icon>&nbsp;
-                <a id="id_ForgotPassword" routerLink="/forgotPassword" routerLinkActive="active"
-                    title="Forgot Password">Forgot Password</a>
-            </div>
-        </p-fieldset>
-    </div>
-    <div *ngIf="data">
-        <p-fieldset class="loginlegend" legend="Weather">
-            <div class="ui-grid-row weather-div">
-                <label for="humidity">Humidity: </label>&nbsp;&nbsp;{{data.main.humidity}}
-            </div>
-            <div class="ui-grid-row login-pw-div">
-                <label for="sunset">Sunrise: </label>&nbsp;&nbsp;{{sunrise}}
-            </div>
-            <div class="ui-grid-row login-pw-div">
-                <label for="sunset">Sunset:</label>&nbsp;&nbsp;{{sunset}}
-            </div>
-        </p-fieldset>
-    </div>
+  <div>
+    <p-fieldset class="loginlegend" legend="Login">
+      <form [formGroup]="loginFormGroup">
+        <div class="ui-message ui-message-error ui-corner-all" *ngIf="formSubmitted && errors">
+          {{errorMessage}}
+        </div>
+        <div class="ui-grid-row login-username-div">
+          <span class="ui-float-label">
+            <input id="userName" type="text" maxlength="256" trim pInputText formControlName="userName" />
+            <label style="font-size:medium;" for="username">Username:</label>
+          </span>
+          <div class="ui-message ui-message-error ui-corner-all"
+            *ngIf="loginFormGroup.get('userName').invalid && (loginFormGroup.controls['userName'].touched)">
+            <span *ngIf="loginFormGroup.controls.userName.errors.required">User Name is required.</span>
+          </div>
+        </div><br>
+        <div class="ui-grid-row login-pw-div">
+          <span class="ui-float-label">
+            <input id="password" pPassword showPassword type="password" maxlength="256" trim pInputText
+              formControlName="password" />
+            <label style="font-size: medium;" for="password">Password:</label>
+          </span>
+          <div class="ui-message ui-message-error ui-corner-all"
+            *ngIf="!loginFormGroup.controls['password'].valid && (loginFormGroup.controls['password'].touched)">
+            <span *ngIf="loginFormGroup.controls.password.errors.required">Password is required.</span>
+          </div>
+        </div>
+        <div class="ui-grid-row">
+          <div class="ui-grid-col-6">
+            <button (click)='login()' pButton id="btn_login_cmp_submit_1" type="submit"
+              class="btn btn-single-width btn-login" icon="fa fa-sign-in" title="Login to One Stop App"
+              label="Login"></button>
+          </div>
+          <div class="ui-grid-col-6">
+            <a id="id_ForgotPassword" routerLink="/forgotPassword" routerLinkActive="active"
+              title="Forgot Password">Continue as guest</a>
+            <mat-icon class="mat-icon-margin" aria-hidden="true">navigate_next</mat-icon>&nbsp;
+          </div>
+        </div>
+      </form><br>
+      <div class="link-icon-div">
+        <mat-icon class="mat-icon-margin" aria-hidden="true">person_add</mat-icon>&nbsp;
+        <a id="idUserRegistration" routerLink="/registerUser" routerLinkActive="active" title="User Registration">User
+          Registration</a>
+      </div>
+      <div class="link-icon-div">
+        <mat-icon class="mat-icon-margin" aria-hidden="true">lock_open</mat-icon>&nbsp;
+        <a id="idForgotUsername" routerLink="/forgotUsername" routerLinkActive="active" title="Forgot Username">Forgot
+          Username</a>
+      </div>
+      <div class="link-icon-div">
+        <mat-icon class="mat-icon-margin" aria-hidden="true">lock</mat-icon>&nbsp;
+        <a id="id_ForgotPassword" routerLink="/forgotPassword" routerLinkActive="active" title="Forgot Password">Forgot
+          Password</a>
+      </div>
+      <div class="elfsight-app-c853658c-cc8d-4a30-b983-278059c1650d"></div>
+    </p-fieldset>
+  </div>
+  <!-- <div *ngIf="data">
+    <p-fieldset class="loginlegend" legend="Weather">
+      <div class="ui-grid-row weather-div">
+        <label for="humidity">Humidity: </label>&nbsp;&nbsp;{{data.main.humidity}}
+      </div>
+      <div class="ui-grid-row login-pw-div">
+        <label for="sunset">Sunrise: </label>&nbsp;&nbsp;{{sunrise}}
+      </div>
+      <div class="ui-grid-row login-pw-div">
+        <label for="sunset">Sunset:</label>&nbsp;&nbsp;{{sunset}}
+      </div>
+    </p-fieldset>
+  </div> -->
 </div>
+<p-dialog customMutationAttribute id="systemUse" header="About" icon="fa fa-question-circle" [closable]="false"
+  [closeOnEscape]="false" [(visible)]="displayDialogue" modal="modal">
+  <p>
+    One Stop App is designed for the purpose of giving complete experience on Movies, News and Technologies. Please do
+    register to get full access to our application, Where you can see Movie reviews of new releases, Trending News and
+    Technologies
+  </p>
+  <p-footer>
+    <button pButton id="btn_login_cmp_agree_1" type="button" (click)="closeWindow()" class="btn-single-width"
+      icon="fa fa-check-square-o" title="Close" label="Close"></button>
+  </p-footer>
+</p-dialog>

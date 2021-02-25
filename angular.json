@@ -132,5 +132,8 @@
       }
     }
   },
-  "defaultProject": "onestopapp"
+  "defaultProject": "onestopapp",
+  "cli": {
+    "analytics": "0d24563e-a4b6-4862-9ad1-9e19ed800506"
+  }
 }

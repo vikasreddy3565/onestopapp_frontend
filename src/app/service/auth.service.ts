@@ -11,9 +11,8 @@ import { Observable } from 'rxjs';
 export class AuthenticationService {
   constructor(
     private httpservice: HttpTokenService,
-    private router: Router,
-    private http: HttpClient
-  ) {}
+    private router: Router, private http: HttpClient,
+  ) { }
 
   login(username: string, password: string) {
     const jwtParams: JwtParameters = new JwtParameters();
@@ -24,10 +23,9 @@ export class AuthenticationService {
     jwtParams.grantType = 'password';
     jwtParams.refreshToken = null;
     const body = JSON.stringify(jwtParams);
-    const url = environment.webApiEndPoint + 'auth/Authenticate';
-    const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
-    return this.http
-      .post(url, body, { headers })
+    const url = 'auth/Authenticate';
+    return this.httpservice
+      .post(url, body)
       .pipe(map((response) => response as any))
       .toPromise()
       .then((r) => {
@@ -42,7 +40,7 @@ export class AuthenticationService {
           authResult.isAuthenticated = true;
           authResult.userStatusId = data.userDetails.userStatusId;
         } else {
-          authResult.message = 'Password is wrong';
+          authResult.message = r.message
           authResult.isAuthenticated = false;
         }
 
@@ -61,9 +59,8 @@ export class AuthenticationService {
     jwtParams.clientSecret = '';
     jwtParams.grantType = 'refresh_token';
     jwtParams.refreshToken = localStorage.getItem('refresh_token');
-    const url = environment.webApiEndPoint + 'token/authenticate';
-    const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
-    return this.http.post(url, JSON.stringify(jwtParams), { headers }).pipe(
+    const url = 'token/authenticate';
+    return this.httpservice.post(url, JSON.stringify(jwtParams)).pipe(
       tap((tokenData: any) => {
         const data = JSON.parse(tokenData.data);
         localStorage.setItem('id_token', data.access_token);

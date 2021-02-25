@@ -31,9 +31,8 @@ export class RegisterComponent implements OnInit {
   userNameExistMessage = '';
   emailExistFlg = false;
   emailExistMessage = '';
-  confirmEmail: string;
-  confirmPasword: string;
   disableSubmitButton = false;
+  hide = true;
 
   constructor(
     private fb: FormBuilder,
@@ -41,9 +40,23 @@ export class RegisterComponent implements OnInit {
     private router: Router,
     private el: ElementRef,
     private toastService: ToastService,
-    private weatherService: WeatherService
-  ) {}
+  ) { }
   async ngOnInit() {
+    this.buildForm();
+    this.registerUserService.getCountries().subscribe((dt: Countries[]) => {
+      const data = dt;
+      if (dt.length > 0) {
+        const list: SelectItem[] = [];
+        list.push({ label: '- Select -', value: null });
+        dt.forEach((e: Countries) => {
+          list.push({ label: e.name, value: e.id });
+        });
+        this.countries = list;
+      }
+    });
+  }
+
+  buildForm() {
     this.registerDesignee = new RegisterUser();
     this.registerFormGroup = this.fb.group({
       firstName: new FormControl(this.registerDesignee.firstName, [
@@ -66,13 +79,13 @@ export class RegisterComponent implements OnInit {
         Validators.required,
         Validators.pattern(RegularExpressions.email),
       ]),
-      userName: new FormControl(this.registerDesignee.userName, [
+      userName: new FormControl(this.registerDesignee.userName = '', [
         Validators.required,
         Validators.minLength(6),
-        Validators.maxLength(21),
+        Validators.maxLength(30),
         Validators.pattern(RegularExpressions.trim),
       ]),
-      password: new FormControl(this.registerDesignee.password, [
+      password: new FormControl(this.registerDesignee.password = '', [
         Validators.required,
         Validators.pattern(RegularExpressions.password),
       ]),
@@ -82,17 +95,6 @@ export class RegisterComponent implements OnInit {
       countryId: new FormControl(this.registerDesignee.countryId, [
         Validators.required,
       ]),
-    });
-    this.registerUserService.getCountries().subscribe((dt: Countries[]) => {
-      const data = dt;
-      if (dt.length > 0) {
-        const list: SelectItem[] = [];
-        list.push({ label: '- Select -', value: null });
-        dt.forEach((e: Countries) => {
-          list.push({ label: e.name, value: e.id });
-        });
-        this.countries = list;
-      }
     });
   }
 
@@ -108,6 +110,7 @@ export class RegisterComponent implements OnInit {
       return; // Validation failed, exit from method.
     } else {
       this.disableSubmitButton = true; // disable submit button
+      this.bindModel(this.registerFormGroup);
       this.registerUserService
         .createRegisterDesignee(this.registerDesignee)
         .subscribe(
@@ -136,10 +139,19 @@ export class RegisterComponent implements OnInit {
     this.disableSubmitButton = false;
   }
 
+  bindModel(form: FormGroup) {
+    this.registerDesignee.firstName = form.get('firstName').value;
+    this.registerDesignee.lastName = form.get('lastName').value;
+    this.registerDesignee.email = form.get('email').value;
+    this.registerDesignee.userName = form.get('userName').value;
+    this.registerDesignee.password = form.get('password').value;
+    this.registerDesignee.countryId = form.get('countryId').value;
+  }
+
   emailCompare() {
     if (
-      this.confirmEmail !== undefined &&
-      this.confirmEmail !== this.registerDesignee.email
+      this.registerFormGroup.get('email').value !== undefined &&
+      this.registerFormGroup.get('email').value !== this.registerFormGroup.get('confirmEmail').value
     ) {
       this.emailMatchFlg = true;
       this.emailMatchMessage = 'The Confirm email does not match the email';
@@ -149,9 +161,8 @@ export class RegisterComponent implements OnInit {
   }
 
   passwordCompare() {
-    if (
-      this.confirmPasword !== undefined &&
-      this.confirmPasword !== this.registerDesignee.password
+    if (this.registerFormGroup.get('confirmPasword').value !== undefined &&
+      this.registerFormGroup.get('confirmPasword').value !== this.registerFormGroup.get('password').value
     ) {
       this.passwordMatchFlg = true;
       this.passwordMatchMessage =
@@ -169,7 +180,7 @@ export class RegisterComponent implements OnInit {
           this.userNameExistFlg = data;
           if (this.userNameExistFlg) {
             this.userNameExistMessage =
-              'A duplicate User Name exists in DMS. Please enter a unique User Name.';
+              'A duplicate User Name exists in One Stop. Please enter a unique User Name.';
           }
         });
     }
@@ -177,21 +188,15 @@ export class RegisterComponent implements OnInit {
 
   checkEmailExist() {
     this.emailCompare();
-    if (this.registerDesignee.email.toLowerCase().indexOf('faa.gov') === -1) {
-      this.registerUserService
-        .checkEmailExists(this.registerDesignee.email)
-        .subscribe((data) => {
-          this.emailExistFlg = data;
-          if (this.emailExistFlg) {
-            this.emailExistMessage =
-              'A duplicate Email Address exists in DMS. Please enter a unique Email Address.';
-          }
-        });
-    } else {
-      this.emailExistFlg = true;
-      this.emailExistMessage =
-        'Please enter a Email Address that is not a faa.gov domain.';
-    }
+    this.registerUserService
+      .checkEmailExists(this.registerDesignee.email)
+      .subscribe((data) => {
+        this.emailExistFlg = data;
+        if (this.emailExistFlg) {
+          this.emailExistMessage =
+            'A duplicate Email Address exists in One Stop. Please enter a unique Email Address.';
+        }
+      });
   }
 
   cancelRegistration() {
