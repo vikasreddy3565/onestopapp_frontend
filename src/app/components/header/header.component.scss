@@ -1,4 +1,61 @@
-.navbar {
-    box-shadow : 0px -3px 15px black;
-    height: 40pt;
+#header {
+  height: 50px;
+  border-bottom: 1px solid #c3d2df;
+  display: flex;
+  box-shadow: 0px -3px 15px black;
+  #headerLink {
+    margin: 0;
+    padding: 0 0 0 10px;
+    display: block;
+    float: left;
+    height: 50px;
+    text-decoration: none;
+    width: 15em;
+  }
+  #link {
+    display: grid;
+    font-size: 1.3em;
+    word-wrap: break-word;
+    color: #044188;
+    float: left;
+    text-decoration: none;
+  }
+  #logout {
+    display: grid;
+    font-size: 1.3em;
+    word-wrap: break-word;
+    color: #044188;
+    float: right;
+    text-decoration: none;
+  }
+  #dmsLink:hover {
+    text-decoration: underline;
+  }
+  #headerlink {
+    width: 100%;
+    margin: 31px 10px 0px 12px;
+    text-align: right;
+  }
+  img {
+    width: 4.57em;
+    height: 4.57em;
+    margin: 1.1em 0em;
+  }
+  #logodiv {
+    span {
+      font-size: 0.9rem;
+      font-weight: 700;
+      line-height: 1.1111;
+      font-family: sans-serif;
+      color: #2b3d7f;
+      margin: 2.1em 0 0 0.2em;
+      width: 9em;
+    }
+    a {
+      display: flex;
+    }
+  }
+
+  @media screen and (max-width: 400px) {
+  }
 }

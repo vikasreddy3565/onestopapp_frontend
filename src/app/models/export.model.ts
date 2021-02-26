@@ -8,7 +8,6 @@ export class JwtParameters {
   grantType: string;
   refreshToken: string;
   clientId: string;
-  clientSecret: string;
   username: string;
   password: string;
 }
@@ -24,9 +23,7 @@ export class User {
   password: string;
   fullName: string;
   authToken: string;
-  cloaId: number;
-  messageCount: number;
-  constructor() {}
+  constructor() { }
 }
 
 export class ActionButton {

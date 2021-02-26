@@ -8,6 +8,7 @@ export const environment = {
   baseFolder: '/',
   webApiDomain: 'localhost:5000',
   webApiEndPoint: 'http://localhost:5000/api/',
+  clientId: '1B341AE5-AF8C-4111-B316-B4EC7EA258DC',
   httpRequestInterceptorExpirationTime: 45000 // ms
 };
 

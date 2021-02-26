@@ -10,6 +10,7 @@ import { AuthenticationService } from '../../service/auth.service';
 import { MovieService } from '../../service/movie.service';
 import { NewsService } from '../../service/news.service';
 import { MessageService as ToastService } from 'primeng';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -33,15 +34,12 @@ export class LoginComponent implements OnInit {
   tickInterval = 10;
   formSubmitted = false;
   totalResults: any;
-  errors: boolean;
-  router: any;
-  errorMessage: string;
   displayDialogue: boolean;
   loadAPI: Promise<unknown>;
   constructor(private fb: FormBuilder,
     private movieService: MovieService,
     private newsService: NewsService,
-    private authService: AuthenticationService, private toastService: ToastService
+    private authService: AuthenticationService, private toastService: ToastService, private router: Router
   ) { }
 
   ngOnInit(): void {
@@ -82,8 +80,8 @@ export class LoginComponent implements OnInit {
   }
 
   public loadScript() {
-    console.log('preparing to load...')
-    let node = document.createElement('script');
+    console.log('preparing to load...');
+    const node = document.createElement('script');
     node.src = 'https://apps.elfsight.com/p/platform.js';
     node.type = 'text/javascript';
     node.async = true;
@@ -143,14 +141,11 @@ export class LoginComponent implements OnInit {
     if (this.loginFormGroup.valid) {
       this.authService.login(this.loginFormGroup.get('userName').value, this.loginFormGroup.get('password').value).then(authResult => {
         if (authResult.isAuthenticated === true) {
-          this.errors = false;
           this.router.navigate(['//home']);
         } else {
-          this.errors = true;
-          this.errorMessage = authResult.message;
           this.toastService.add({ key: 'onestop', severity: 'error', summary: 'Info Message', detail: authResult.message });
         }
-      });;
+      });
     }
   }
 }

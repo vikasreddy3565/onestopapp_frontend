@@ -54,6 +54,7 @@ import { PickListModule } from 'primeng/picklist';
 import { ToastModule } from 'primeng/toast';
 import { CarouselModule } from 'primeng/carousel';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MegaMenuModule } from 'primeng/megamenu';
 
 @NgModule({
   exports: [
@@ -112,6 +113,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
     PickListModule,
     ToastModule,
     MatProgressSpinnerModule,
+    MegaMenuModule
   ],
 })
-export class MaterialPrimengModule {}
+export class MaterialPrimengModule { }

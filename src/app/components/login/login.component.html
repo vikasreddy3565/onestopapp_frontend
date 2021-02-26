@@ -71,9 +71,6 @@
   <div>
     <p-fieldset class="loginlegend" legend="Login">
       <form [formGroup]="loginFormGroup">
-        <div class="ui-message ui-message-error ui-corner-all" *ngIf="formSubmitted && errors">
-          {{errorMessage}}
-        </div>
         <div class="ui-grid-row login-username-div">
           <span class="ui-float-label">
             <input id="userName" type="text" maxlength="256" trim pInputText formControlName="userName" />

@@ -4,7 +4,7 @@ import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { CommonModule } from '@angular/common';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MaterialPrimengModule } from './material.primeng.module';
 import { LoginModule } from './components/login/login.module';
@@ -23,6 +23,8 @@ import { RegisterComponent } from './components/user/registration/registration.c
 import { PanelModule } from 'primeng';
 import { RegisterUserService } from './service/registration.service';
 import { UserModule } from './components/user/user.module';
+import { TokenHandlerInterceptor } from './tokenhandler.interceptor';
+import { HomeModule } from './components/home/home.module';
 
 @NgModule({
   declarations: [AppComponent],
@@ -38,7 +40,8 @@ import { UserModule } from './components/user/user.module';
     FormsModule,
     ReactiveFormsModule,
     MaterialPrimengModule,
-    PanelModule
+    PanelModule,
+    HomeModule
   ],
   providers: [
     MessageService,
@@ -51,7 +54,12 @@ import { UserModule } from './components/user/user.module';
     NewsService,
     RegisterUserService,
     { provide: OSA_WEBAPI_LISTENER_URL, useValue: environment.webApiEndPoint },
+    // {
+    //   provide: HTTP_INTERCEPTORS,
+    //   useClass: TokenHandlerInterceptor,
+    //   multi: true
+    // },
   ],
   bootstrap: [AppComponent],
 })
-export class AppModule {}
+export class AppModule { }

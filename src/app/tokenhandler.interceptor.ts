@@ -18,7 +18,7 @@ export class TokenHandlerInterceptor implements HttpInterceptor {
   public jwtHelper: JwtHelperService;
   constructor(
     private auth: AuthenticationService,
-    private router: Router,  private utilityService: UtilityService ) {
+    private router: Router, private utilityService: UtilityService) {
     this.jwtHelper = new JwtHelperService();
   }
 
@@ -58,7 +58,7 @@ export class TokenHandlerInterceptor implements HttpInterceptor {
   private setHeaders(request: HttpRequest<any>) {
     return request.clone({
       setHeaders: {
-        Authorization: `Bearer ${localStorage.getItem('id_token')}`,
+        Authorization: `Bearer ${sessionStorage.getItem('id_token')}`,
         Accept: `application/json`,
         'If-Modified-Since': 'Mon, 26 Jul 1997 05:00:00 GMT',
         'Cache-Control': 'no-cache',
@@ -76,7 +76,7 @@ export class TokenHandlerInterceptor implements HttpInterceptor {
       // Operation failed; error is an HttpErrorResponse
       catchError((error: HttpErrorResponse) => {
         if (+error.status === 401) {
-          const refreshToken = localStorage.getItem('refresh_token');
+          const refreshToken = sessionStorage.getItem('refresh_token');
           // we can try to relogin if refresh token is not expired yet
           if (refreshToken && !this.jwtHelper.isTokenExpired(refreshToken)) {
             // refresh token

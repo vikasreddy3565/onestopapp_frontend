@@ -14,57 +14,54 @@ export class AuthenticationService {
     private router: Router, private http: HttpClient,
   ) { }
 
-  login(username: string, password: string) {
+  async login(username: string, password: string) {
     const jwtParams: JwtParameters = new JwtParameters();
     const authResult: AuthResult = new AuthResult();
     jwtParams.username = username;
     jwtParams.password = password;
-    jwtParams.clientSecret = '';
+    jwtParams.clientId = environment.clientId;
     jwtParams.grantType = 'password';
     jwtParams.refreshToken = null;
     const body = JSON.stringify(jwtParams);
     const url = 'auth/Authenticate';
-    return this.httpservice
-      .post(url, body)
-      .pipe(map((response) => response as any))
-      .toPromise()
-      .then((r) => {
-        const data = JSON.parse(r.data);
-        if (r.code === '1000') {
-          sessionStorage.setItem(
-            'currentUser',
-            JSON.stringify(data.userDetails)
-          );
-          localStorage.setItem('id_token', data.access_token);
-          localStorage.setItem('refresh_token', data.refresh_token);
-          authResult.isAuthenticated = true;
-          authResult.userStatusId = data.userDetails.userStatusId;
-        } else {
-          authResult.message = r.message
-          authResult.isAuthenticated = false;
-        }
-
-        return authResult;
-      })
-      .catch((error) => {
-        console.log(error);
+    try {
+      const r = await this.httpservice
+        .post(url, body)
+        .pipe(map((response) => response as any))
+        .toPromise();
+      const data = JSON.parse(r.data);
+      if (r.code === '1000') {
+        sessionStorage.setItem(
+          'currentUser',
+          JSON.stringify(data.userDetails)
+        );
+        sessionStorage.setItem('id_token', data.access_token);
+        sessionStorage.setItem('refresh_token', data.refresh_token);
+        authResult.isAuthenticated = true;
+        authResult.userStatusId = data.userDetails.userStatusId;
+      } else {
+        authResult.message = r.message;
         authResult.isAuthenticated = false;
-        authResult.message = 'Log in failed';
-        return authResult;
-      });
+      }
+      return authResult;
+    } catch (error) {
+      console.log(error);
+      authResult.isAuthenticated = false;
+      authResult.message = 'Log in failed';
+      return authResult;
+    }
   }
 
   refreshToken() {
     const jwtParams: JwtParameters = new JwtParameters();
-    jwtParams.clientSecret = '';
     jwtParams.grantType = 'refresh_token';
-    jwtParams.refreshToken = localStorage.getItem('refresh_token');
+    jwtParams.refreshToken = sessionStorage.getItem('refresh_token');
     const url = 'token/authenticate';
     return this.httpservice.post(url, JSON.stringify(jwtParams)).pipe(
       tap((tokenData: any) => {
         const data = JSON.parse(tokenData.data);
-        localStorage.setItem('id_token', data.access_token);
-        localStorage.setItem('refresh_token', data.refresh_token);
+        sessionStorage.setItem('id_token', data.access_token);
+        sessionStorage.setItem('refresh_token', data.refresh_token);
         console.log(tokenData.message);
       })
     );
@@ -129,8 +126,8 @@ export class AuthenticationService {
     // remove user from local storage to log user out
     sessionStorage.removeItem('currentUser');
     sessionStorage.removeItem('legacyAuth');
-    localStorage.removeItem('id_token');
-    localStorage.removeItem('refresh_token');
+    sessionStorage.removeItem('id_token');
+    sessionStorage.removeItem('refresh_token');
     this.router.navigate(['//login']);
   }
 
