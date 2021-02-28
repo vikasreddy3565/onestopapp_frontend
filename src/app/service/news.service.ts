@@ -6,27 +6,9 @@ import { Observable } from 'rxjs';
 export class NewsService {
   constructor(private http: HttpClient) { }
 
-  //   async getNews() {
-  //     await fetch('https://news67.p.rapidapi.com/trending', {
-  //       method: 'GET',
-  //       headers: {
-  //         'x-rapidapi-host': 'news67.p.rapidapi.com',
-  //         'x-rapidapi-key': '1f6591bee5msh045cfe247127a14p12ca17jsnc61ddf79426c',
-  //       },
-  //     })
-  //       .then((response) => {
-  //         console.log(response);
-  //       })
-  //       .catch((err) => {
-  //         console.log(err);
-  //       });
-  //   }
-
   getNews(): Observable<any> {
     const date = new Date();
-    // const header = new HttpHeaders({ 'x-rapidapi-host': 'news67.p.rapidapi.com',
-    // 'x-rapidapi-key': '1f6591bee5msh045cfe247127a14p12ca17jsnc61ddf79426c'});
     return this.http
-      .get('http://newsapi.org/v2/everything?q=apple&from=' + date.getFullYear() + '-' + date.getMonth() + '-' + date.getDate() + '&sortBy=popularity&apiKey=efc79a42f4524ccc8b91dfad211ee220');
+      .get('http://newsapi.org/v2/top-headlines?country=us&category=business&apiKey=efc79a42f4524ccc8b91dfad211ee220');
   }
 }

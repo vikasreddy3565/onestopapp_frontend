@@ -36,16 +36,18 @@ export class LoginComponent implements OnInit {
   totalResults: any;
   displayDialogue: boolean;
   loadAPI: Promise<unknown>;
-  constructor(private fb: FormBuilder,
+  constructor(
+    private fb: FormBuilder,
     private movieService: MovieService,
     private newsService: NewsService,
-    private authService: AuthenticationService, private toastService: ToastService, private router: Router
-  ) { }
+    private authService: AuthenticationService,
+    private toastService: ToastService,
+    private router: Router
+  ) {}
 
   ngOnInit(): void {
     this.loginFormGroup = this.initiateFormGroup();
     this.loadAPI = new Promise(() => {
-      console.log('resolving promise...');
       this.loadScript();
     });
     // this.weatherService.getIp().subscribe((id: any) => {
@@ -59,10 +61,8 @@ export class LoginComponent implements OnInit {
       this.news = dt;
       this.news.articles = this.news.articles.slice(0, 5);
     });
-    this.authService.getCountries().subscribe(() => {
-    });
-    this.movieService.getGenres().subscribe(() => {
-    });
+    this.authService.getCountries().subscribe(() => {});
+    this.movieService.getGenres().subscribe(() => {});
     this.movieService.getNowPlaying(1).subscribe((res) => {
       this.totalResults = res.total_results;
       this.nowPlaying = res.results;
@@ -139,13 +139,23 @@ export class LoginComponent implements OnInit {
       controls[controlName].markAsTouched()
     );
     if (this.loginFormGroup.valid) {
-      this.authService.login(this.loginFormGroup.get('userName').value, this.loginFormGroup.get('password').value).then(authResult => {
-        if (authResult.isAuthenticated === true) {
-          this.router.navigate(['//home']);
-        } else {
-          this.toastService.add({ key: 'onestop', severity: 'error', summary: 'Info Message', detail: authResult.message });
-        }
-      });
+      this.authService
+        .login(
+          this.loginFormGroup.get('userName').value,
+          this.loginFormGroup.get('password').value
+        )
+        .then((authResult) => {
+          if (authResult.isAuthenticated === true) {
+            this.router.navigate(['//home']);
+          } else {
+            this.toastService.add({
+              key: 'onestop',
+              severity: 'error',
+              summary: 'Info Message',
+              detail: authResult.message,
+            });
+          }
+        });
     }
   }
 }
